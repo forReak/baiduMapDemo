@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+</head>
+<br>
+hello world!</br>
+ajax demo <button id="search" onclick="ajaxSearch()">查询</button>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    var info = [[${info}]];
+    $(function(){
+        console.log("项目路径："+ctxPath);
+        console.log("后台返回数据："+JSON.stringify(info));
+    });
+
+    /**
+     * ajax 的demo
+     */
+    function ajaxSearch(){
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/search",
+            data: {usreName:"admin",password:"123"},
+            dataType: "json",
+            success: function (result) {
+                alert(result.flag);
+                alert(result.result);
+                alert(result.message);
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+</script>
+</html>

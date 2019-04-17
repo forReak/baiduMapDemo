@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>通用配置文件</title>
+</head>
+<body>
+<!--引入js文件 @{}代表当前项目根路径（/baiduMapDemo_war_exploded）-->
+<th:block th:fragment="common-js">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+</th:block>
+
+<th:block th:fragment="bootstrap-css" th:remove="tag">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</th:block>
+
+<!--声明全局上下文及通用js和css-->
+<th:block th:fragment="proejct-context" th:remove="tag">
+    <th:block th:include="/common/base::common-js" th:remove="tag"/>
+    <th:block th:include="/common/base::bootstrap-css" th:remove="tag"/>
+    <meta name="__ctx__" th:content="${#httpServletRequest.getContextPath()}"/>
+    <script th:inline="javascript">
+        var ctx = $('meta[name="__ctx__"]');
+        var ctxPath = ctx.length>0?ctx[0].content:"";
+    </script>
+</th:block>
+</body>
+</html>

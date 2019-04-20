@@ -1,0 +1,77 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--初始化页面时默认页面不缩放，并仅用用户页面缩放-->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <style type="text/css">
+        body, html {width: 100%;height: 100%; margin:0;}
+        #allmap{height:500px;width:100%;}
+        #r-result,#r-result table{width:100%;}
+    </style>
+    <!--引用百度地图api-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xwWID35KbLINQjL50sazS4TmLAo8wUFx"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+
+    <!--引用jquery-->
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <title>hello world</title>
+</head>
+<body>
+<div id="allmap"></div>
+<div>我的位置：<input type="text" id="mypos"> <button id="search" onclick="myPos()">查询</button></div>
+<div><button onclick="showPos()">显示坐标</button></div>
+<div id="log"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+    map.enableScrollWheelZoom();
+
+
+    var startPoint;
+    var startResults = null;
+    var startInfowin =new BMap.InfoWindow("<p class='t-c'><input value='选为起点' type='button' onclick='startDeter();' /></p>");
+
+    function startDeter(){
+        startPoint = startInfowin.getPosition();
+    }
+
+
+    var options = {
+        onSearchComplete: function(results){
+            if (local.getStatus() == BMAP_STATUS_SUCCESS){
+                startResults = results;
+                // 判断状态是否正确
+                var s = [];
+                for (var i = 0; i < results.getCurrentNumPois(); i ++){
+                    // s.push(results.getPoi(i).title + ", " + results.getPoi(i).address);
+                    var poi = results.getPoi(i);
+                    var point = poi.point;
+                    s.push("<div><p><a onmouseover='map.openInfoWindow(startInfowin,startResults.getPoi("+ i +").point);' href='#'>");
+                    s.push(poi.title);
+                    s.push("</a></p><p>");
+                    s.push(poi.address);
+                    s.push("</p></div>");
+                }
+                document.getElementById("log").innerHTML = s.join("<br>");
+            }
+        }
+    };
+    var local = new BMap.LocalSearch(map, options);
+
+    function myPos(){
+        local.search($("#mypos").val());
+    }
+
+    function showPos(){
+        console.log(startPoint);
+        // http://api.map.baidu.com/geosearch/v3/nearby?ak=您的ak&geotable_id=****&location=116.395884,39.932154
+        //进行检索自定义数据
+        var loc = startPoint.lng+","+startPoint.lat;
+        var url = "http://api.map.baidu.com/geosearch/v3/nearby?ak=xwWID35KbLINQjL50sazS4TmLAo8wUFx&geotable_id=30960&location="
+    }
+</script>

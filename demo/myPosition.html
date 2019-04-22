@@ -20,11 +20,10 @@
 </head>
 <body>
 <div id="allmap"></div>
-<div>我的位置：<input type="text" id="mypos"> <button id="search" onclick="myPos()">查询</button></div>
-<div><button onclick="showPos()">显示坐标</button></div>
+<div>我的位置：<input type="text" value="天安门" id="mypos"> <button id="search" onclick="myPos()">查询</button></div>
+<div id="myPlace"></div>
+<div><input type="text" id="q" placeholder="请输入您想要查询的东西"><input type="text" id="radius" placeholder="请设置查询半径"><button onclick="showPos()">查询附近</button></div>
 <div id="log"></div>
-</body>
-</html>
 <script type="text/javascript">
 
     var map = new BMap.Map("allmap");
@@ -69,11 +68,17 @@
 
     function showPos(){
         console.log(startPoint);
+        var loc = startPoint.lng+","+startPoint.lat;
+        document.getElementById("myPlace").innerText="您当前的位置是："+loc;
+
         // http://api.map.baidu.com/geosearch/v3/nearby?ak=您的ak&geotable_id=****&location=116.395884,39.932154
         //进行检索自定义数据
-        var loc = startPoint.lng+","+startPoint.lat;
-        var url = "http://api.map.baidu.com/geosearch/v3/nearby?ak=xwWID35KbLINQjL50sazS4TmLAo8wUFx&geotable_id=201369&location="+loc+"&q=城&radius=1000";
 
+        var q = $("#q").val();
+        var radius = $("#radius").val();
+        var url = "http://api.map.baidu.com/geosearch/v3/nearby?ak=xwWID35KbLINQjL50sazS4TmLAo8wUFx&geotable_id=201369&location="+loc+"&q="+q+"&radius="+radius;
         console.log(url);
     }
 </script>
+</body>
+</html>

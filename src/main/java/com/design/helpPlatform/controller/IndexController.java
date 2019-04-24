@@ -13,7 +13,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(ResponseMap responseMap, Model model){
         model.addAttribute("info",new ResponseMap(true,"hello world!","成功查询！"));
-        return "index";
+        return "login";
     }
 
     @RequestMapping("/search")

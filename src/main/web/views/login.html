@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>Title</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+</head>
+<body>
+用户名： <input type="text" id=" userName"></br>
+密码： <input type="text" id="password"></br>
+<button id="loginBtn" onclick="login()">登陆</button>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+
+    /**
+     * 登陆
+     */
+    function login(){
+        var userName = $("#userName").val();
+        var password = $("#password").val();
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/login",
+            data: {usreName:userName,password:password},
+            dataType: "json",
+            success: function (result) {
+                window.location.href=ctxPath+"/myCenter";
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+</script>
+</html>

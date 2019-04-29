@@ -1,15 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <title>Title</title>
-    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"/>
 </head>
+
+<style>
+
+    #banner{
+        font-size: 2rem;
+        margin-top: 8rem;
+        margin-left:8rem;
+    }
+
+    input{
+        border: 0.02rem solid black;
+    }
+    #loginForm{
+        margin-top: 4rem;
+        margin-left: 5rem;
+    }
+
+    .title{
+        margin-top: 0.5rem;
+    }
+
+    #loginBtn{
+        margin-left: 4rem;
+    }
+
+</style>
 <body>
-用户名： <input type="text" id=" userName"></br>
-密码： <input type="text" id="password"></br>
-<button id="loginBtn" onclick="login()">登陆</button>
+<canvas id="canvas"></canvas>
+
+<div id="banner">
+    帮买平台
+</div>
+<div id="loginForm">
+    <div class="title">
+        用户名： <input type="text" id="userName">
+    </div>
+    <div class="title">
+        密&nbsp;&nbsp;&nbsp;&nbsp;码： <input type="text" id="password">
+    </div>
+    <div class="title">
+        <button class="btn-primary" id="loginBtn" onclick="login()">登陆</button>
+        <button class="btn-primary" id="submitBtn" onclick="submit()">注册</button>
+    </div>
+</div>
+
 </body>
 
 <script type="text/javascript" th:inline="javascript">

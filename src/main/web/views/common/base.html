@@ -5,21 +5,22 @@
     <title>通用配置文件</title>
 </head>
 <body>
-<!--引入js文件 @{}代表当前项目根路径（/baiduMapDemo_war_exploded）-->
 <th:block th:fragment="common-js">
     <script th:src="@{/js/jquery.js}"></script>
-    <script th:src="@{/js/rem.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
 </th:block>
 
-<th:block th:fragment="bootstrap-css" th:remove="tag">
+<th:block th:fragment="bootstrap-css">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </th:block>
+<th:block th:fragment="commonCss">
+    <link rel="stylesheet" th:href="@{/css/commonCss.css}"/>
+</th:block>
 
-<!--声明全局上下文及通用js和css-->
-<th:block th:fragment="proejct-context" th:remove="tag">
-    <th:block th:include="/common/base::common-js" th:remove="tag"/>
-    <th:block th:include="/common/base::bootstrap-css" th:remove="tag"/>
+<th:block th:fragment="proejct-context">
+    <th:block th:include="/common/base::common-js"/>
+    <th:block th:include="/common/base::bootstrap-css"/>
+    <th:block th:include="/common/base::commonCss"/>
     <meta name="__ctx__" th:content="${#httpServletRequest.getContextPath()}"/>
     <script th:inline="javascript">
         var ctx = $('meta[name="__ctx__"]');

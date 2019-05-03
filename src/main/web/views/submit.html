@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-    <title>登陆</title>
+    <title>注册</title>
     <th:block th:include="common/base::proejct-context" th:remove="tag"/>
 </head>
 
@@ -40,13 +40,21 @@
 </div>
 <div id="loginForm">
     <div class="title">
-        用户名： <input type="text" id="userName">
+        用户名： <input type="text" id="userName"><span style="color:red;">*</span>
     </div>
     <div class="title">
-        密&nbsp;&nbsp;&nbsp;&nbsp;码： <input type="password" id="password">
+        手机号： <input type="text" id="phone">
     </div>
     <div class="title">
-        <button class="btn-primary" id="loginBtn" onclick="login()">登陆</button>
+        昵称： <input type="text" id="nickName">
+    </div>
+    <div class="title">
+        密&nbsp;&nbsp;&nbsp;&nbsp;码： <input type="password" id="password"><span style="color:red;">*</span>
+    </div>
+    <div class="title">
+        确认密码： <input type="password" id="checkPassword" ><span style="color:red;">*</span>
+    </div>
+    <div class="title">
         <button class="btn-primary" id="submitBtn" onclick="submit()">注册</button>
     </div>
 </div>
@@ -58,13 +66,28 @@
     /**
      * 登陆
      */
-    function login(){
-        var userName = $("#userName").val();
-        var password = $("#password").val();
+    function submit(){
+
+        var userName = $("#userName").val().trim();
+        var password = $("#password").val().trim();
+        var checkPassword = $("#checkPassword").val().trim();
+        var phone = $("#phone").val().trim();
+        var nickName = $("#nickName").val().trim();
+
+        if(userName===""){
+            alert("请输入用户名！");
+            return false;
+        }
+        if(password!==checkPassword){
+            alert("您两次输入的密码不同，请确认后输入！");
+            return false;
+        }
+
+
         $.ajax({
             type: "post",
-            url:ctxPath+ "/login",
-            data: {usreName:userName,password:password},
+            url:ctxPath+ "/submit",
+            data: {userName:userName,password:password,phone:phone,nickName:nickName},
             dataType: "json",
             success: function (result) {
                 window.location.href=ctxPath+"/";
@@ -73,10 +96,6 @@
                 console.log(result);
             }
         });
-    }
-
-    function submit(){
-        window.location.href=ctxPath+"/submit_view";
     }
 </script>
 </html>

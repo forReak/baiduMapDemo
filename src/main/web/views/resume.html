@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+</head>
+
+springmvc前后台传递数据：代码层面，如果要在html中显示后台传递的数据，
+则需要使用th:value="${info.flag}"形式。如果要在js中使用后台传递过来的数据，使用
+<code>
+    var info = [&nbsp;[${info}]]
+</code>
+形式。
+<input type="text" th:value="${info.flag}">
+<input type="text" th:value="${info.result}">
+<input type="text" th:value="${info.message}">
+</br>
+ajax 查询数据： <button id="search" onclick="ajaxSearch()">查询</button>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    var info = [[${info}]];
+    $(function(){
+        console.log("项目路径："+ctxPath);
+        console.log("后台返回数据："+JSON.stringify(info));
+    });
+
+    /**
+     * ajax 的demo
+     */
+    function ajaxSearch(){
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/search",
+            data: {usreName:"admin",password:"123"},
+            dataType: "json",
+            success: function (result) {
+                alert(result.flag);
+                alert(result.result);
+                alert(result.message);
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+</script>
+</html>

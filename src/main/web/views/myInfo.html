@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+
+</head>
+<body>
+个人中心
+<button type="button" class="btn btn-warning" onclick="logout()">注销</button>
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+
+    /**
+     * 注销
+     */
+    function logout(){
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/logout",
+            data: {usreName:null},
+            dataType: "json",
+            success: function (result) {
+                parent.location.href=ctxPath+"/";
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+</script>
+</html>

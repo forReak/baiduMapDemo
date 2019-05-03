@@ -15,23 +15,37 @@ public class loginFilter extends OncePerRequestFilter {
         String uri = request.getRequestURI();
         String contextPath = request.getContextPath();
         //添加不过滤的内容
-        String[] notFilter = new String[]{"/login","/"};
+        String[] notFilter = new String[]{
+                ".js",".css",".png",".jpeg",".xml",".json",
+                "/index","/rider","/sendRule","/webSiteResume",
+                "/login_view","/login","/submit_view","/submit"
+        };
 
 
         boolean doFilter = true;
         for (String s : notFilter) {
-            if (uri.equals(contextPath+s)) {
+            if (uri.indexOf(s)!=-1) {
                 // 如果uri中包含不过滤的uri，则不进行过滤
                 doFilter = false;
                 break;
             }
         }
+
+        if(request.getServletPath().equals("/")){
+            doFilter = false;
+        }
+
         if (doFilter) {
             // 执行过滤
             // 从session中获取登录者实体
             Object obj = request.getSession().getAttribute("loginedUser");
             if (null == obj) {
-                response.sendRedirect(contextPath);
+//                response.sendRedirect(contextPath);
+                response.setContentType("text/html;charset=utf-8");
+                PrintWriter out = response.getWriter();
+                out.println("<script language='javascript' type='text/javascript'>");
+                out.println("window.top.location.href='" + request.getContextPath() + "/login_view'");
+                out.println("</script>");
             } else {
                 // 如果session中存在登录者实体，则继续
                 filterChain.doFilter(request, response);

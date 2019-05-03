@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>代买平台</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+</head>
+<body style="overflow: hidden">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand"  target="cusFrame" href="index">帮买平台</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link"  target="cusFrame" href="index">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    在线下单
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="vy_view" target="cusFrame">同城送取</a>
+                    <a class="dropdown-item" href="vy_edit" target="cusFrame">同城代买</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"  target="cusFrame" th:href="@{/myOrder/list}">我的订单 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"  target="cusFrame" th:href="@{/rider}">骑手招募 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"  target="cusFrame" th:href="@{/sendRule}">配送规则 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"  target="cusFrame" th:href="@{/webSiteResume}">网站介绍 <span class="sr-only">(current)</span></a>
+            </li>
+            <!-- <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>-->
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+
+            <img style="width: 15px;height: 15px" th:src="@{/image/myCenter.png}" alt="个人中心">
+            <a class="nav-link"  th:href="@{/login_view}" th:if="${session.loginedUser}==null">您好，请登录<span class="sr-only">(current)</span></a>
+            <a class="nav-link" target="cusFrame"  th:href="@{/myCenter/myInfo}" th:if="${session.loginedUser}!=null" th:text="${session.loginedUser}"><span class="sr-only">(current)</span></a>
+            <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        </form>
+    </div>
+</nav>
+<iframe id="content" style="width: 100%;height: 100%" src="index" frameborder="0" name="cusFrame"></iframe>
+
+</body>
+
+<script>
+    $(function () {
+
+        var contentHeight = $(window).height();
+        console.log(contentHeight);
+
+        $("#content").css("height",contentHeight-64);
+    })
+
+</script>
+</html>

@@ -64,10 +64,15 @@
         $.ajax({
             type: "post",
             url:ctxPath+ "/login",
-            data: {usreName:userName,password:password},
+            data: {userName:userName,password:password},
             dataType: "json",
             success: function (result) {
-                window.location.href=ctxPath+"/";
+                if(result.flag){
+                    window.location.href=ctxPath+"/";
+                }
+                else{
+                    alert(result.message);
+                }
             },
             error: function (result) {
                 console.log(result);

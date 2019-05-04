@@ -16,7 +16,7 @@ public class loginFilter extends OncePerRequestFilter {
         String contextPath = request.getContextPath();
         //添加不过滤的内容
         String[] notFilter = new String[]{
-                ".js",".css",".png",".jpeg",".xml",".json",
+                ".ico",".js",".css",".png",".jpeg",".xml",".json",
                 "/index","/rider","/sendRule","/webSiteResume",
                 "/login_view","/login","/submit_view","/submit"
         };

@@ -22,7 +22,7 @@
                     在线下单
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="vy_view" target="cusFrame">同城送取</a>
+                    <a class="dropdown-item"  th:href="@{/delivery/main}" target="cusFrame">同城送取</a>
                     <a class="dropdown-item" href="vy_edit" target="cusFrame">同城代买</a>
                 </div>
             </li>
@@ -37,6 +37,9 @@
             </li>
             <li class="nav-item active">
                 <a class="nav-link"  target="cusFrame" th:href="@{/webSiteResume}">网站介绍 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active" th:if="${session.rider==1}">
+                <a class="nav-link"  target="cusFrame" th:href="@{/myOrder/getOrder}">接单<span class="sr-only">(current)</span></a>
             </li>
             <!-- <li class="nav-item">
                             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>

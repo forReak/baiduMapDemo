@@ -8,7 +8,8 @@ public interface SubmitService {
      * @param password
      * @param phone
      * @param nickName
+     * @param rider
      * @return
      */
-    boolean submit(String userName, String password, String phone, String nickName);
+    boolean submit(String userName, String password, String phone, String nickName, String rider);
 }

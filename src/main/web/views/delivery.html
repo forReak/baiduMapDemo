@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>同城送取</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"/>
+</head>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=CGkMErD3Gux07tGL26GCoWGU"></script>
+
+<body>
+<form action="" id="orderInfo">
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">寄件信息</h4>
+        <div class="needs-validation" novalidate="">
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="country">请选择省份</label>
+                    <select class="custom-select d-block w-100" name="orderCity" id="country" required="">
+                        <option value="江苏">--请选择--</option>
+                        <option>江苏</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        请选择省份
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="state">请选择城市</label>
+                    <select class="custom-select d-block w-100" name="orderPri" id="state" required="">
+                        <option value="南京">--请选择--</option>
+                        <option>南京</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        请选择城市
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="zip">邮编</label>
+                    <input type="text" class="form-control" name="orderZip" id="zip" placeholder="邮编" required="">
+                    <div class="invalid-feedback">
+                        请输入邮编
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="sendAddress">寄件地址</label>
+                <input type="text" class="form-control" name="startPos" id="sendAddress" placeholder="请填写寄件人地址：" required="">
+                <div class="invalid-feedback">
+                    请输入正确的地址信息
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="sendAddressDetail">详细地址：</label>
+                <input type="text" class="form-control" name="startDetailPos" id="sendAddressDetail" placeholder="请填写详细地址：" required="">
+                <div class="invalid-feedback">
+                    请输入正确的地址信息
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="sendName">联系人姓名：</label>
+                <input type="text" class="form-control" name="sendName" id="sendName" placeholder="联系人姓名：" required="">
+                <div class="invalid-feedback">
+                    请输入联系人姓名
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="sendPhone">联系人电话：</label>
+                <input type="text" class="form-control" name="sendPhone" id="sendPhone" placeholder="联系人电话：" required="">
+                <div class="invalid-feedback">
+                    请输入联系人电话
+                </div>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="saveToaddress">
+                <label class="custom-control-label" for="same-address">保存到地址薄</label>
+            </div>
+            <!--收件--------------------------------------------------------------------------->
+            <!--收件--------------------------------------------------------------------------->
+            <hr class="mb-4">
+            <h4 class="mb-3">收件信息</h4>
+
+            <div class="mb-3">
+                <label for="sendAddress">收件地址</label>
+                <input type="text" class="form-control" id="reciveAddress" name="endPos" placeholder="请填写收件人地址：" required="">
+                <div class="invalid-feedback">
+                    请输入正确的地址信息
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="reciveAddressDetail">详细地址：</label>
+                <input type="text" class="form-control" name="endDetailPos" id="reciveAddressDetail" placeholder="请填写详细地址：" required="">
+                <div class="invalid-feedback">
+                    请输入正确的地址信息
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="reciveName">联系人姓名：</label>
+                <input type="text" class="form-control" name="reciveName" id="reciveName" placeholder="联系人姓名：" required="">
+                <div class="invalid-feedback">
+                    请输入联系人姓名
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="recivePhone">联系人电话：</label>
+                <input type="text" class="form-control" name="recivePhone" id="recivePhone" placeholder="联系人电话：" required="">
+                <div class="invalid-feedback">
+                    请输入联系人电话
+                </div>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="same-address">
+                <label class="custom-control-label" for="same-address">保存到地址薄</label>
+            </div>
+            <hr class="mb-4">
+
+                <!--配送信息--------------------------------------------------------------->
+                <!--配送信息--------------------------------------------------------------->
+            <h4 class="mb-3">收件信息</h4>
+
+
+            <div class="mb-3">
+                <label for="sendAddress">物品类型</label>
+                <select class="custom-select d-block w-100" name="goods" id="goodsType" required="">
+                    <option value="">--请选择--</option>
+                    <option value="食品饮料">食品饮料</option>
+                    <option value="鲜花">鲜花</option>
+                    <option value="蛋糕">蛋糕</option>
+                    <option value="文件资料">文件资料</option>
+                    <option value="水果生鲜">水果生鲜</option>
+                    <option value="证件照片">证件照片</option>
+                    <option value="数码家电">数码家电</option>
+                    <option value="服饰鞋帽">服饰鞋帽</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="sendAddress">物品价值</label>
+                <select class="custom-select d-block w-100" id="goodsPrice" required="">
+                    <option value="">--请选择--</option>
+                    <option value="0-100元">0-100元</option>
+                    <option value="101-500元">101-500元</option>
+                    <option value="501-1000元">501-1000元</option>
+                    <option value="1001-2000元">1001-2000元</option>
+                    <option value="2001-5000元">2001-5000元</option>
+                    <option value="5001-10000元">5001-10000元</option>
+                    <option value="10001元以上">10001元以上</option>
+                </select>
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="weight">货物重量：（kg）</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">-</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="货物重量" id="weight" name="orderWeight">
+                    <div class="input-group-append">
+                        <span class="input-group-text">+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="goodsRemark">备注信息：</label>
+                <input type="text" class="form-control" id="goodsRemark" value="无" placeholder="备注信息：" required="">
+            </div>
+
+            <!--配送信息------------------------------------------------------------------------>
+            <!--配送信息------------------------------------------------------------------------>
+            <h4 class="mb-3">配送信息</h4>
+
+
+            <div class="mb-3">
+                <label for="getGoodsTime">取件时间</label>
+                <select name="sendTime" class="custom-select d-block w-100" id="getGoodsTime" required="">
+                    <option value="">--请选择--</option>
+                    <option value="" selected>即时取件</option>
+                    <option value="">预约取件</option>
+                </select>
+            </div>
+
+            <!--<div class="form-group mb-3">
+                <label for="dtp_input1" class="col-md-2 control-label">DateTime Picking</label>
+                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input1" value="" /><br/>
+            </div>-->
+
+            <div class="mb-3">
+                <label>配送方式</label>
+                <input type="radio" class="radio-button" value="汽车" name="sendType" id="car"><label for="car">汽车</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" class="radio-button" value="其他" name="sendType" id="other"><label for="other">其他</label>
+            </div>
+
+            <div class="mb-3">
+                <label for="sendRemark">备注信息：</label>
+                <input type="text" class="form-control" id="sendRemark" value="无" placeholder="备注信息：" required="">
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" onclick="orderNow()">立即下单</button>
+        </div>
+    </div>
+</form>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+
+    /**
+     * 立即下单！
+     */
+    function orderNow(){
+        //获取所有输入项进行验证
+        var country = $("#country").val().trim();
+        var state = $("#state").val().trim();
+        var zip = $("#zip").val().trim();
+        var sendAddress = $("#sendAddress").val().trim();
+        var sendAddressPos = startPos.lng + " "+ startPos.lat;
+        var sendAddressDetail = $("#sendAddressDetail").val().trim();
+        var sendName = $("#sendName").val().trim();
+        var sendPhone = $("#sendPhone").val().trim();
+        var reciveAddress = $("#reciveAddress").val().trim();
+        var reciveAddressPos = endPos.lng + " "+ endPos.lat;
+        var reciveAddressDetail = $("#reciveAddressDetail").val().trim();
+        var reciveName = $("#reciveName").val().trim();
+        var recivePhone = $("#recivePhone").val().trim();
+        var goodsType = $("#goodsType").val();
+        var goodsPrice = $("#goodsPrice").val();
+        var weight = $("#weight").val().trim();
+        var goodsRemark = $("#goodsRemark").val().trim();
+        var sendRemark = $("#sendRemark").val().trim();
+        var sendType = $("input[name=sendType]").val();
+
+
+        checkNull(country,"送货省份");
+        checkNull(state,"送货城市");
+        checkNull(zip,"送货邮编");
+        checkNull(sendAddress,"送货地址");
+        checkNull(sendAddressDetail,"送货具体地址");
+        checkNull(sendName,"寄件人");
+        checkNull(sendPhone,"寄件人电话");
+        checkNull(reciveAddress,"收件人地址");
+        checkNull(reciveAddressDetail,"收件人详细地址");
+        checkNull(reciveName,"收件人");
+        checkNull(recivePhone,"收件人电话");
+        checkNull(goodsType,"货物类型");
+        checkNull(goodsPrice,"货物价值");
+        checkNull(weight,"货物重量");
+        checkNull(sendType,"送货方式");
+
+        var parames = {
+            country:country,
+            state:state,
+            zip:zip,
+            sendAddress:sendAddress,
+            sendAddressPos:sendAddressPos,
+            sendAddressDetail:sendAddressDetail,
+            sendName:sendName,
+            sendPhone:sendPhone,
+            reciveAddress:reciveAddress,
+            reciveAddressPos:reciveAddressPos,
+            reciveAddressDetail:reciveAddressDetail,
+            reciveName:reciveName,
+            recivePhone:recivePhone,
+            goodsType:goodsType,
+            goodsPrice:goodsPrice,
+            weight:weight,
+            goodsRemark:goodsRemark,
+            sendRemark:sendRemark,
+            sendType:sendType
+        };
+
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/delivery/orderNow",
+            data: parames,
+            dataType: "json",
+            success: function (result) {
+                if(result.flag){
+                    window.setTimeout(window.location.href = ctxPath+ "/myOrder/list",5000);
+
+                }
+                else{
+                    alert(result.message);
+                }
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+
+    function checkNull(e,name){
+        if(e===""||e===null||e===undefined){
+            alert(name+"为空！请检查输入！");
+            return false;
+        }
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    //初始化地图脚本
+    //保存开始位置
+    var startPos;
+    //保存结束位置
+    var endPos;
+
+    var map = new BMap.Map();//在百度地图容器中创建一个地图
+    var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+        {
+            "input": "sendAddress",
+            "location": map
+        });
+    var ec = new BMap.Autocomplete(    //建立一个自动完成的对象
+        {
+            "input": "reciveAddress",
+            "location": map
+        });
+
+    var startValue;
+    var endValue;
+    ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+        var _value = e.item.value;
+        startValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+        setStartPlace();
+    });
+    ec.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+        var _value = e.item.value;
+        endValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+        setEndPlace();
+    });
+
+    function setStartPlace() {// 创建地址解析器实例
+        var myGeo = new BMap.Geocoder();// 将地址解析结果显示在地图上,并调整地图视野
+        myGeo.getPoint(startValue, function (point) {
+            if (point) {
+                //将地址存在临时input中
+                startPos = point;
+                console.log("起始坐标："+ JSON.stringify(point))
+            }
+        });
+    }
+    function setEndPlace() {// 创建地址解析器实例
+        var myGeo = new BMap.Geocoder();// 将地址解析结果显示在地图上,并调整地图视野
+        myGeo.getPoint(endValue, function (point) {
+            if (point) {
+                //将地址存在临时input中
+                endPos = point;
+                console.log("终止坐标："+ JSON.stringify(point));
+            }
+        });
+    }
+</script>
+
+
+</html>

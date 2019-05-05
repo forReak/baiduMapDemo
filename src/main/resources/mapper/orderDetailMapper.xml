@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.design.helpPlatform.dao.OrderDetailDao">
+    <resultMap id="OrderDetailMap" type="com.design.helpPlatform.entity.OrderDetailEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <id column="order_weight" property="orderWeight" jdbcType="DECIMAL"/>
+        <id column="goods_type" property="goodsType" jdbcType="VARCHAR"/>
+        <id column="goods_price" property="goodsPrice" jdbcType="VARCHAR"/>
+        <id column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <id column="goods_spec" property="goodsSpec" jdbcType="VARCHAR"/>
+        <id column="goods_money" property="goodsMoney" jdbcType="DECIMAL"/>
+        <id column="goods_remark" property="goodsRemark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--表名-->
+    <sql id="t_order_detail"> t_order_detail </sql>
+
+    <!--字段名-->
+    <sql id="user_base_column">
+         id,order_No,order_weight,goods_type,goods_price,goods_name,goods_spec,goods_money
+         goods_remark
+    </sql>
+
+
+
+    <insert id="insert" parameterType="com.design.helpPlatform.entity.OrderDetailEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="t_order_detail"/>
+        values (
+        #{id},
+        #{orderNo},
+        #{orderWeight},
+        #{goodsType},
+        #{goodsPrice},
+        #{goodsName},
+        #{goodsSpec},
+        #{goodsMoney},
+        #{goodsRemark}
+        )
+    </insert>
+
+
+
+</mapper>

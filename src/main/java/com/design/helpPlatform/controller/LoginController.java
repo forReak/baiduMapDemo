@@ -42,9 +42,9 @@ public class LoginController {
 
     @RequestMapping("/submit")
     @ResponseBody
-    public ResponseMap submit(String userName,String password,String phone,String nickName){
-        System.out.println(userName+password+phone+nickName);
-        boolean flag = submitService.submit(userName, password, phone, nickName);
+    public ResponseMap submit(String userName,String password,String phone,String nickName,String rider){
+        System.out.println(userName+password+phone+nickName+rider);
+        boolean flag = submitService.submit(userName, password, phone, nickName, rider);
         if(flag){
             return new ResponseMap(true,"success","success");
         }else{

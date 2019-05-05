@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>接单</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+
+</head>
+<style>
+    .r{
+        color:red;
+    }
+</style>
+<br>
+接单</br>
+<span class="r">待接单：</span></br>
+<div id="waitOrder"></div>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+
+    $(function(){
+
+        getAllMyOrder();
+
+    })
+
+    function getAllMyOrder(){
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/myOrder/allOrderList",
+            data: {},
+            dataType: "json",
+            success: function (result) {
+                if(result.flag){
+                    showOrder(result.result);
+                }
+                else{
+                    alert(result.message);
+                }
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+
+
+    function showOrder(orderInfo){
+        if(orderInfo!==null&&orderInfo!==""&&orderInfo!==undefined){
+            var wait = "";
+            var sending = "";
+            var finish = "";
+            var canal = "";
+            for(let i = 0 ; i < orderInfo.length; i++){
+                let oneOrder = orderInfo[i];
+                var str = "订单信息---订单号："+oneOrder.orderNo+
+                    "。 省份："+ oneOrder.orderCity+
+                    "。 城市："+ oneOrder.orderPri+
+                    "。 邮编："+ oneOrder.orderZip+
+                    "。 寄件地址："+ oneOrder.startPos+
+                    "。 寄件详细地址："+ oneOrder.startDetailPos+
+                    "。 寄件人："+ oneOrder.sendName+
+                    "。 寄件人手机："+ oneOrder.sendPhone+
+                    "。 收件地址："+ oneOrder.endPos+
+                    "。 收件详细地址："+ oneOrder.endDetailPos+
+                    "。 收件人："+ oneOrder.reciveName+
+                    "。 收件人手机："+ oneOrder.recivePhone +"<a style='background-color: #9fcdff;font-size: large' type='"+oneOrder.orderNo+"' onclick='check(this)'>接单</a></br>";
+
+                if(oneOrder.orderStatus===10){
+                    wait += str;
+                }
+            }
+
+            $("#waitOrder").append(wait);
+        }
+    }
+
+    function check(data){
+        var checkget = confirm("是否要接此单？");
+        if(checkget){
+            window.location.href=ctxPath + "/gotoNav" + "?orderNo="+data.type;
+        }
+    }
+</script>
+
+</html>

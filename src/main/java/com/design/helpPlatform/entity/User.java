@@ -21,6 +21,16 @@ public class User {
 
     private String sex;
 
+    private Integer rider;
+
+    public Integer getRider() {
+        return rider;
+    }
+
+    public void setRider(Integer rider) {
+        this.rider = rider;
+    }
+
     public Integer getId() {
         return id;
     }

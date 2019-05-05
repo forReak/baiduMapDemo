@@ -8,10 +8,15 @@
 <th:block th:fragment="common-js">
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
+    <script th:src="@{/js/popper.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+
 </th:block>
 
 <th:block th:fragment="bootstrap-css">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
 </th:block>
 <th:block th:fragment="commonCss">
     <link rel="stylesheet" th:href="@{/css/commonCss.css}"/>
@@ -20,7 +25,7 @@
 <th:block th:fragment="proejct-context">
     <th:block th:include="/common/base::common-js"/>
     <th:block th:include="/common/base::bootstrap-css"/>
-    <th:block th:include="/common/base::commonCss"/>
+    <!--<th:block th:include="/common/base::commonCss"/>-->
     <meta name="__ctx__" th:content="${#httpServletRequest.getContextPath()}"/>
     <script th:inline="javascript">
         var ctx = $('meta[name="__ctx__"]');

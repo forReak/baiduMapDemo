@@ -55,6 +55,9 @@
         确认密码： <input type="password" id="checkPassword" ><span style="color:red;">*</span>
     </div>
     <div class="title">
+        是否注册为骑手： <input type="radio" name="rider" value="1" >是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" checked value="0" name="rider" >否
+    </div>
+    <div class="title">
         <button class="btn-primary" id="submitBtn" onclick="submit()">注册</button>
     </div>
 </div>
@@ -73,7 +76,7 @@
         var checkPassword = $("#checkPassword").val().trim();
         var phone = $("#phone").val().trim();
         var nickName = $("#nickName").val().trim();
-
+        var rider = $("input[name=rider]").val();
         if(userName===""){
             alert("请输入用户名！");
             return false;
@@ -91,7 +94,7 @@
         $.ajax({
             type: "post",
             url:ctxPath+ "/submit",
-            data: {userName:userName,password:password,phone:phone,nickName:nickName},
+            data: {userName:userName,password:password,phone:phone,nickName:nickName,rider:rider},
             dataType: "json",
             success: function (result) {
                 if(result.flag){

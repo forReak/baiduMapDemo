@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html {width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
+        #l-map{height:300px;width:100%;}
+        #r-result,#r-result table{width:100%;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xwWID35KbLINQjL50sazS4TmLAo8wUFx"></script>
+    <title>驾车导航的结果面板</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+
+</head>
+<style>
+
+</style>
+<body>
+<div id="l-map"></div>
+<div id="r-result" style="height: 250px;overflow: scroll"></div>
+<div id="detail"></div>
+<button onclick="checkArrive()">点击确认送达</button>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+
+    var orderInfo = [[${orderInfo}]];
+    var start = orderInfo.startGps;
+    var end = orderInfo.endGps;
+    console.log(start+"   "+end);
+    var str = "订单信息---订单号："+orderInfo.orderNo+
+        "。 省份："+ orderInfo.orderCity+
+        "。 城市："+ orderInfo.orderPri+
+        "。 邮编："+ orderInfo.orderZip+
+        "。 寄件地址："+ orderInfo.startPos+
+        "。 寄件详细地址："+ orderInfo.startDetailPos+
+        "。 寄件人："+ orderInfo.sendName+
+        "。 寄件人手机："+ orderInfo.sendPhone+
+        "。 收件地址："+ orderInfo.endPos+
+        "。 收件详细地址："+ orderInfo.endDetailPos+
+        "。 收件人："+ orderInfo.reciveName+
+        "。 收件人手机："+ orderInfo.recivePhone +"</br>";
+
+    $("#detail").append(str);
+
+    var startpoint = new BMap.Point(start.split(" ")[0],start.split(" ")[1]);
+    var endpoint = new BMap.Point(end.split(" ")[0],end.split(" ")[1]);
+
+    // 百度地图API功能
+    var map = new BMap.Map("l-map");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+    map.enableScrollWheelZoom();
+    var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
+    driving.search(startpoint, endpoint);
+
+
+    function checkArrive(){
+        var flag = confirm("是否确认已送达？");
+        if(flag){
+            window.location.href = ctxPath + "/myOrder/sendArrived?orderNo="+orderInfo.orderNo;
+        }
+    }
+</script>
+
+</html>

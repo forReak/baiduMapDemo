@@ -6,7 +6,94 @@
     <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
 
 </head>
+<style>
+    .r{
+        color:red;
+    }
+</style>
+<br>
 <body>
-我的订单
+我的订单</br>
+<span class="r">待接单：</span></br>
+<div id="waitOrder"></div>
+<span class="r">正在送：</span></br>
+<div id="sendingOrder"></div>
+<span class="r">已完成：</span></br>
+<div id="finishOrder"></div>
+<span class="r">已取消：</span></br>
+<div id="canalOrder"></div>
 </body>
+
+<script type="text/javascript" th:inline="javascript">
+
+    $(function(){
+
+        getAllMyOrder();
+
+    })
+
+    function getAllMyOrder(){
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/myOrder/orderList",
+            data: {},
+            dataType: "json",
+            success: function (result) {
+                if(result.flag){
+                    showOrder(result.result);
+                }
+                else{
+                    alert(result.message);
+                }
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+
+
+    function showOrder(orderInfo){
+        if(orderInfo!==null&&orderInfo!==""&&orderInfo!==undefined){
+            var wait = "";
+            var sending = "";
+            var finish = "";
+            var canal = "";
+            for(let i = 0 ; i < orderInfo.length; i++){
+                let oneOrder = orderInfo[i];
+                var str = "订单信息---订单号："+oneOrder.orderNo+
+                        "。 省份："+ oneOrder.orderCity+
+                        "。 城市："+ oneOrder.orderPri+
+                        "。 邮编："+ oneOrder.orderZip+
+                        "。 寄件地址："+ oneOrder.startPos+
+                        "。 寄件详细地址："+ oneOrder.startDetailPos+
+                        "。 寄件人："+ oneOrder.sendName+
+                        "。 寄件人手机："+ oneOrder.sendPhone+
+                        "。 收件地址："+ oneOrder.endPos+
+                        "。 收件详细地址："+ oneOrder.endDetailPos+
+                        "。 收件人："+ oneOrder.reciveName+
+                        "。 收件人手机："+ oneOrder.recivePhone +"</br>"
+
+                if(oneOrder.orderStatus===10){
+                    wait += str;
+                }
+                if(oneOrder.orderStatus===12){
+                    sending += str;
+                }
+                if(oneOrder.orderStatus===16){
+                    finish += str;
+                }
+                if(oneOrder.orderStatus===17){
+                    canal += str;
+                }
+            }
+
+            $("#waitOrder").append(wait);
+            $("#sendingOrder").append(sending);
+            $("#finishOrder").append(finish);
+            $("#canalOrder").append(canal);
+        }
+    }
+</script>
+
 </html>

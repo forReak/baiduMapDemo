@@ -15,7 +15,7 @@ public class SubmitServiceImpl implements SubmitService {
     UserDao userDao;
 
     @Override
-    public boolean submit(String userName, String password, String phone, String nickName) {
+    public boolean submit(String userName, String password, String phone, String nickName, String rider) {
         //根据用户名查找用户信息
         User user = userDao.getUserByUerName(userName);
         if(user==null){
@@ -25,7 +25,7 @@ public class SubmitServiceImpl implements SubmitService {
             submitUser.setPassword(getMD5ofStr(password));
             submitUser.setPhoneNum(phone);
             submitUser.setNickName(nickName);
-
+            submitUser.setRider(Integer.valueOf(rider));
             int i = userDao.insertUserByUserInfo(submitUser);
             return true;
         }else{

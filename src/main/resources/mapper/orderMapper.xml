@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.design.helpPlatform.dao.OrderDao">
+    <resultMap id="OrderMap" type="com.design.helpPlatform.entity.OrderEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <id column="order_owner" property="orderOwner" jdbcType="INTEGER"/>
+        <id column="start_pos" property="startPos" jdbcType="VARCHAR"/>
+        <id column="end_pos" property="endPos" jdbcType="VARCHAR"/>
+        <id column="start_gps" property="startGps" jdbcType="VARCHAR"/>
+        <id column="end_gps" property="endGps" jdbcType="VARCHAR"/>
+        <id column="send_name" property="sendName" jdbcType="VARCHAR"/>
+        <id column="send_phone" property="sendPhone" jdbcType="VARCHAR"/>
+        <id column="recive_name" property="reciveName" jdbcType="VARCHAR"/>
+        <id column="recive_phone" property="recivePhone" jdbcType="VARCHAR"/>
+        <id column="order_type" property="orderType" jdbcType="VARCHAR"/>
+        <id column="order_status" property="orderStatus" jdbcType="INTEGER"/>
+        <id column="order_create_time" property="orderCreateTime"/>
+        <id column="order_rider_id" property="orderRiderId" jdbcType="INTEGER"/>
+        <id column="order_start_time" property="orderStartTime" />
+        <id column="order_rider_send_time" property="orderRiderSendTime" />
+        <id column="order_user_check_time" property="orderUesrCheckTime" />
+        <id column="order_content_id" property="orderContentId" jdbcType="VARCHAR"/>
+        <id column="start_detail_pos" property="startDetailPos" jdbcType="VARCHAR"/>
+        <id column="end_detail_pos" property="endDetailPos" jdbcType="VARCHAR"/>
+        <id column="send_type" property="sendType" jdbcType="VARCHAR"/>
+        <id column="send_remark" property="sendRemark" jdbcType="VARCHAR"/>
+        <id column="order_city" property="orderCity" jdbcType="VARCHAR"/>
+        <id column="order_pri" property="orderPri" jdbcType="VARCHAR"/>
+        <id column="order_zip" property="orderZip" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--表名-->
+    <sql id="t_order"> t_order </sql>
+    <!--字段名-->
+    <sql id="user_base_column">
+        id,order_no,order_owner,start_pos,end_pos,start_gps,end_gps,send_name,send_phone,
+        recive_name,recive_phone,order_type,order_status,order_create_time,order_rider_id,
+        order_start_time,order_rider_send_time,order_user_check_time,start_detail_pos,end_detail_pos,
+        send_type,send_remark,order_city,order_pri,order_zip
+    </sql>
+
+
+
+    <insert id="insertOrderDao" parameterType="com.design.helpPlatform.entity.OrderEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="t_order"/>
+        values (
+        #{id},
+        #{orderNo},
+        #{orderOwner},
+        #{startPos},
+        #{endPos},
+        #{startGps},
+        #{endGps},
+        #{sendName},
+        #{sendPhone},
+        #{reciveName},
+        #{recivePhone},
+        #{orderType},
+        #{orderStatus},
+        #{orderCreateTime},
+        #{orderRiderId},
+        #{orderStartTime},
+        #{orderRiderSendTime},
+        #{orderUesrCheckTime},
+        #{orderContentId},
+        #{startDetailPos},
+        #{endDetailPos},
+        #{sendType},
+        #{sendRemark},
+        #{orderCity},
+        #{orderPri},
+        #{orderZip}
+        )
+    </insert>
+
+
+    <select id="getOrderEntityByUserId" parameterType="Integer" resultMap="OrderMap">
+        select  <include refid="user_base_column" />
+        from t_order
+        where order_owner = #{userId}
+    </select>
+
+    <select id="getAllWaitOrderEntity"  resultMap="OrderMap">
+        select  <include refid="user_base_column" />
+        from t_order
+        where order_status = '10'
+    </select>
+
+    <select id="getOrderEntityByRider" parameterType="Integer"  resultMap="OrderMap">
+        select  <include refid="user_base_column" />
+        from t_order
+        where order_status = '12' and order_rider_id = #{useId}
+    </select>
+
+    <select id="getOrderEntityByOrderNo" parameterType="String" resultMap="OrderMap">
+        select  <include refid="user_base_column" />
+        from t_order
+        where order_no = #{orderNo}
+    </select>
+
+    <update id="updateOrderToSending" parameterType="Map">
+        update <include refid="t_order"/>
+        set order_rider_id = #{userId},order_status = 12,order_start_time = #{time}
+        where order_no = #{orderNo}
+    </update>
+
+
+    <update id="updateOrderFinish"  parameterType="Map">
+        update <include refid="t_order"/>
+        set order_status = 16,order_rider_send_time = #{time}
+        where order_no = #{orderNo}
+    </update>
+</mapper>

@@ -26,7 +26,8 @@ public class LoginServiceImpl implements LoginService {
         User user = userDao.getUserByUseNameAndPassword(map);
         if(user!=null){
             session.setAttribute("loginedUser",user.getNickName());
-
+            session.setAttribute("userId",user.getId());
+            session.setAttribute("rider",user.getRider());
             return true;
         }else{
             return false;

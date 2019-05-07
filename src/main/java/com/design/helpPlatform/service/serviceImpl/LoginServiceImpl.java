@@ -5,6 +5,7 @@ import com.design.helpPlatform.entity.User;
 import com.design.helpPlatform.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 import static com.design.helpPlatform.util.Util.getMD5ofStr;
 
 @Service
+
 public class LoginServiceImpl implements LoginService {
 
     @Autowired

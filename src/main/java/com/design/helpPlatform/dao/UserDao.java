@@ -1,11 +1,13 @@
 package com.design.helpPlatform.dao;
 
 import com.design.helpPlatform.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
 @Repository
+@Mapper
 public interface UserDao {
 
     /**

@@ -8,6 +8,7 @@ import com.design.helpPlatform.entity.OrderInfo;
 import com.design.helpPlatform.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Transactional
+
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
 

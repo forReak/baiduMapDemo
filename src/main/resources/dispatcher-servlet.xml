@@ -12,7 +12,7 @@
     <mvc:annotation-driven/>
 
     <!-- 自动扫描装配 -->
-    <context:component-scan base-package="com.design.*"/>
+    <context:component-scan base-package="com.design.helpPlatform.controller"/>
 
     <!--静态资源映射-->
     <!--本项目把静态资源放在了webapp的statics目录下，资源映射如下-->

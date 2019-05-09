@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.design.helpPlatform.dao.ShopDao">
+    <resultMap id="ShopMap" type="com.design.helpPlatform.entity.ShopEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="shop_url" property="shopUrl" jdbcType="VARCHAR"/>
+        <id column="shop_name" property="shopName" jdbcType="DECIMAL"/>
+        <id column="shop_addr" property="shopAddr" jdbcType="VARCHAR"/>
+        <id column="shop_tags" property="shopTags" jdbcType="VARCHAR"/>
+        <id column="shop_main_item" property="shopMainItem" jdbcType="VARCHAR"/>
+        <id column="online" property="goodsSpec" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--表名-->
+    <sql id="t_shop"> t_shop </sql>
+
+    <!--字段名-->
+    <sql id="base_column">
+         id,shop_url,shop_name,shop_addr,shop_tags,shop_main_item,online
+    </sql>
+
+    <select id="getShopInfoByUrl" parameterType="String" resultMap="ShopMap">
+        select <include refid="base_column"/>
+        from <include refid="t_shop"/>
+        where shop_url = #{url}
+    </select>
+
+
+</mapper>

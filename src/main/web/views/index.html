@@ -6,9 +6,9 @@
     <title>Title</title>
     <th:block th:include="common/base::proejct-context" th:remove="tag"/>
 </head>
-<style>
+<style th:inline="text">
     #banner{
-        background-image: url("/baiduMapDemo_war_exploded/image/banner.jpeg");
+        background-image:url([[@{/image/banner.jpeg}]]);
         background-size: 100% 100%;
         background-repeat: no-repeat;
         width: 100%;
@@ -60,12 +60,12 @@
 </div>
 <div>
     <div class="k_d">
-        <div class="k_d_pic"><img style="width: 300px;height: 300px;" src="/baiduMapDemo_war_exploded/image/send.jpeg" alt="同城快递"></div>
+        <div class="k_d_pic"><img style="width: 300px;height: 300px;" th:src="@{/image/send.jpeg}" alt="同城快递"></div>
         <div class="k_d_title">同城快递</div>
         <div class="k_d_resume">取送快递，取送文件，取送鲜花，取送资料，</br>取送外卖，取送礼物，同城送取，一小时达</div>
     </div>
     <div class="k_d">
-        <div class="k_d_pic"><img style="width: 300px;height: 300px;" src="/baiduMapDemo_war_exploded/image/buy.jpeg" alt="同城代买"></div>
+        <div class="k_d_pic"><img style="width: 300px;height: 300px;" th:src="@{/image/buy.jpeg}" alt="同城代买"></div>
         <div class="k_d_title">同城代买</div>
         <div class="k_d_resume">水果生鲜，日常用品，咖啡热饮，香烟酒水，</br>早餐夜宵，常用药品，足不出户，购遍全城</div>
     </div>

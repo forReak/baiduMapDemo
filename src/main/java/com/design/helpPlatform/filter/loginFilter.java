@@ -14,6 +14,9 @@ public class loginFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String contextPath = request.getContextPath();
+        StringBuffer url = request.getRequestURL();
+
+
         //添加不过滤的内容
         String[] notFilter = new String[]{
                 ".ico",".js",".css",".png",".jpeg",".xml",".json",

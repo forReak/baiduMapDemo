@@ -26,4 +26,21 @@
         where shop_id = #{shopId}
     </select>
 
+    <select id="getGoodsInfoByType" parameterType="Integer" resultMap="GoodsMap">
+        select <include refid="base_column"/>
+        from <include refid="t_goods"/>
+        where type_id = #{type}
+    </select>
+
+
+    <select id="getGoodsByGoodsIds" parameterType="collection" resultMap="GoodsMap">
+        select  <include refid="base_column" />
+        from <include refid="t_goods"/>
+        where id in
+        <foreach collection="collection" item="goodsIdSet" index="index" open="(" close=")" separator=",">
+            #{goodsIdSet}
+        </foreach>
+    </select>
+
+
 </mapper>

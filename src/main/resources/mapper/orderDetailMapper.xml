@@ -11,6 +11,8 @@
         <id column="goods_spec" property="goodsSpec" jdbcType="VARCHAR"/>
         <id column="goods_money" property="goodsMoney" jdbcType="DECIMAL"/>
         <id column="goods_remark" property="goodsRemark" jdbcType="VARCHAR"/>
+        <id column="goods_pic" property="goodsPic" jdbcType="VARCHAR"/>
+        <id column="goods_num" property="goodsNum" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--表名-->
@@ -19,7 +21,7 @@
     <!--字段名-->
     <sql id="user_base_column">
          id,order_No,order_weight,goods_type,goods_price,goods_name,goods_spec,goods_money
-         goods_remark
+         goods_remark,goods_num
     </sql>
 
 
@@ -35,7 +37,9 @@
         #{goodsName},
         #{goodsSpec},
         #{goodsMoney},
-        #{goodsRemark}
+        #{goodsRemark},
+        #{goodsPic},
+        #{goodsNum}
         )
     </insert>
 

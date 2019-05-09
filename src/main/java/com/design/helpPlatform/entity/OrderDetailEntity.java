@@ -13,6 +13,24 @@ public class OrderDetailEntity {
     private String goodsSpec;
     private BigDecimal goodsMoney;
     private String goodsRemark;
+    private String goodsPic;
+    private Integer goodsNum;
+
+    public String getGoodsPic() {
+        return goodsPic;
+    }
+
+    public void setGoodsPic(String goodsPic) {
+        this.goodsPic = goodsPic;
+    }
+
+    public Integer getGoodsNum() {
+        return goodsNum;
+    }
+
+    public void setGoodsNum(Integer goodsNum) {
+        this.goodsNum = goodsNum;
+    }
 
     public Integer getId() {
         return id;

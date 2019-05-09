@@ -28,12 +28,17 @@ public class DeliveryController {
     @RequestMapping("/orderNow")
     @ResponseBody
     public ResponseMap orderNow(OrderInfo orderInfo, HttpSession session){
-        int i = deliveryService.saveOrder(orderInfo, session);
-        if(i>0){
-            return new ResponseMap(true,"success","success");
-        }else{
-            return new ResponseMap(false,"false","success");
+        try {
+            int i = deliveryService.saveOrder(orderInfo, session);
+            if(i>0){
+                return new ResponseMap(true,"success","success");
+            }else{
+                return new ResponseMap(false,"false","success");
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseMap(false,"false","success");
         }
 
     }

@@ -21,11 +21,17 @@ public class LoginController {
     @RequestMapping("/login")
     @ResponseBody
     public ResponseMap login(HttpSession session,String userName,String password){
-        boolean login = loginService.login(userName, password,session);
-        if(login){
-            return new ResponseMap(true,"success","success");
-        }else{
-            return new ResponseMap(false,"false","用户名或密码错误！");
+        try {
+            boolean login = loginService.login(userName, password,session);
+            if(login){
+                return new ResponseMap(true,"success","success");
+            }else{
+                return new ResponseMap(false,"false","用户名或密码错误！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseMap(false,"false",e.getMessage());
+
         }
     }
 

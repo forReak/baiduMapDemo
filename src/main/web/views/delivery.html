@@ -9,7 +9,7 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=CGkMErD3Gux07tGL26GCoWGU"></script>
 
 <body>
-<form action="" id="orderInfo">
+<div id="orderInfo">
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">寄件信息</h4>
         <div class="needs-validation" novalidate="">
@@ -204,7 +204,7 @@
             <button class="btn btn-primary btn-lg btn-block" onclick="orderNow()">立即下单</button>
         </div>
     </div>
-</form>
+</div>
 </body>
 
 <script type="text/javascript" th:inline="javascript">
@@ -280,7 +280,10 @@
             dataType: "json",
             success: function (result) {
                 if(result.flag){
-                    window.setTimeout(window.location.href = ctxPath+ "/myOrder/list",5000);
+                    var flag = window.confirm("下单成功！是否跳转到订单？");
+                    if(flag){
+                        window.location.href = ctxPath+ "/myOrder/list"
+                    }
 
                 }
                 else{
@@ -345,7 +348,7 @@
             }
         });
     }
-    function setEndPlace() {// 创建地址解析器实例
+    function setEndPlace() {// 创的建地址解析器实例
         var myGeo = new BMap.Geocoder();// 将地址解析结果显示在地图上,并调整地图视野
         myGeo.getPoint(endValue, function (point) {
             if (point) {

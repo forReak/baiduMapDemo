@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -36,5 +37,17 @@ public class ShopServiceImpl implements ShopService {
         }else{
             throw new RuntimeException("无法根据url获取商家数据！");
         }
+    }
+
+    @Override
+    public List<GoodsEntity> getShopGoodsByType(String typeId) {
+        List<GoodsEntity> result = goodsDao.getGoodsInfoByType(Integer.valueOf(typeId));
+        return result;
+    }
+
+    @Override
+    public List<GoodsEntity> getGoodsByGoodsIds(Set<String> goodsIdSet) {
+        List<GoodsEntity> result = goodsDao.getGoodsByGoodsIds(goodsIdSet);
+        return result;
     }
 }

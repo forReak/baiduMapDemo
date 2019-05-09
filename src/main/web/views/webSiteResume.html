@@ -1,11 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
+    <title>网站简介</title>
     <meta charset="UTF-8">
-    <title>网站介绍</title>
-    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
-</head>
+    <style type="text/css">
+        p{
+            text-indent:40px;
+            letter-spacing:3px;
+            font-size: 20px;
+            line-height:30px;
+        }
+        .uinfo-flow{
+            width: 1200px;
+            margin: auto;
+        }
+        a{
+            color: white;
+            text-decoration:none
+        }
+        .dl-nav{
+            float:left;
+            width:205px;
+            height:30px;
+            line-height:32px;
+        }
+        dl{
+            float:left;
+        }
+        dt{
+            padding-left: 40px;
+            padding-bottom: 20px;
+            font-size: 25px;
+        }
+        .foot{
+            background: #292929;
+            color: white;
+            height: 200px;
+            padding-top: 30px;
+            padding-left: 100px;
+        }
+        .middle-font{
+            border: black solid 1px
+        }
+        .top-logo{
+            height: 300px;
+            background: url([[@{/image/pic/banner.png}]]);
+
+        }
+    </style>
 <body>
-网站介绍
+<div class="uinfo-container">
+    <div class="top-logo">
+
+    </div>
+    <div class="uinfo-flow">
+        <div>
+            <h1>帮买平台介绍</h1>
+        </div>
+        <div class="middle-font">
+            <p>帮买平台隶属于郑州空隧技术有限公司，是全国专业领先的移动互联网跑腿服务平台，以共享劳动力与时间为众包理念，人人都可注册成为跑腿师傅，并为附近的人提供买、送、取、办等多样化即时服务，为中小企业、电商、本地商户提供安全专业的高端配送服务。懒人神器，平均59分钟送达，足不出户满足用户的一切需求。帮买平台以郑州为起点，截止2018年8月份在全国覆盖了北京、深圳、郑州、南京、杭州、西安、长沙、成都、合肥等137个城市。平台合作跑男已超过100万人，为全国数千万人提供即时跑腿服务，成为近年来发展最快的互联网项目之一。</p>
+            <p>帮买平台是基于大数据技术的共享经济平台，不仅满足了企业与个人更丰富的高端即时服务需求，同时也解决了传统同城快递与跑腿行业效率低下、发展不规范等问题。社会化众包模式也大幅吸纳了社会闲散劳动力，成为绿色、高效、惠民的生态互联网项目。</p>
+            <p>未来帮买平台继续深耕同城快递、同城即时跑腿服务等业务的基础上，将对整个社会劳动力资源进行整合分发，让每个人的知识技能与劳动得到充分利用与回报，将成为中国最大的同城生活服务平台。</p>
+        </div>
+    </div>
+    <div class="uinfo-flow">
+        <div>
+            <h1>企业文化</h1>
+        </div>
+        <div class="middle-font">
+            <p>帮买平台将以长远的眼光、诚信负责的操守、共同成长的理念，发展公司的事业。</p>
+            <p>与公司相关利益共同体和谐发展，以受到用户、员工、股东、合作 伙伴和社会的尊敬为自身的自豪和追求；坚持“用户第一”理念，从创造 用户价值、社会价值开始，从而提升企业价值，同时促进社会文明的繁荣。</p>
+            <p>重视员工利益，激发员工潜能，在企业价值最大化的前提下追求员工价 值的最大实现；通过成熟有效的营销、管理机制，实现企业健康、持续的 利益增长，给予股东丰厚的回报；与所有合作伙伴一起成长，分享成长的价值。不忘关爱社会、回馈社会，以身作则，推动互联网行业的健康发展；互联网不分国界，在全球互联网行业、全球华人社区不断强化跑腿平台的影响力，保持自身的综合实力。 </p>
+            <p>使命：通过互联网服务提升人类生活品质，帮买平台以高 品质的内容、人性化的方式，向用户提供可靠、丰富的互联网产品和服务；帮买平台 的产品和服务像水和电一样源源不断融入人们的生活，丰富人们的精神世界和物质 世界。</p>
+        </div>
+    </div>
+    <div class="uinfo-flow">
+        <div>
+            <h1>业务介绍</h1>
+        </div>
+        <div  style="height: 600px">
+            <img th:src="@{/image/pic/yewu2.png}" style="float: left">
+            <img th:src="@{/image/pic/yewu1.png}" style="float: left;padding-left: 100px">
+        </div>
+    </div>
+</div>
+<div style="padding-top: 10px">
+    <div class="foot">
+        <dl class="dl-nav">
+            <dt>关于我们</dt>
+            <dd><a href="" title="跑腿平台介绍">跑腿平台介绍</a></dd>
+            <dd><a href="" title="媒体报道">媒体报道</a></dd>
+            <dd><a href="" title="联系跑腿平台">联系跑腿平台</a></dd>
+            <dd><a href="" title="跑男解约公示栏">跑男解约公示栏</a></dd>
+        </dl>
+        <dl class="dl-nav">
+            <dt>意见反馈</dt>
+            <dd><a href="" title="常见问题">常见问题</a></dd>
+            <dd><a href="" title="如何下单">如何下单</a></dd>
+            <dd><a href="" title="如何付费">如何付费</a></dd>
+            <dd><a href="" title="如何开具发票">如何开具发票</a></dd>
+        </dl>
+        <dl class="dl-nav">
+            <dt>网站导航</dt>
+            <!--<dd><a href="Product.htm" title="产品功能">产品功能</a></dd>-->
+            <dd><a href="" title="在线下单">在线下单</a></dd>
+            <dd><a href="" title="招商加盟">招商加盟</a></dd>
+            <dd><a href="" title="加入跑男">加入跑男</a></dd>
+            <dd><a href="" title="开放平台">开放平台</a></dd>
+            <!--<dd><a href="https://wmzs.uupt.com/help/index.html" target="_blank" title="UU外卖助手">UU外卖助手</a></dd>-->
+        </dl>
+        <dl class="dl-nav" style="width:280px;padding-right:20px;">
+            <dt>联系客服</dt>
+            <dd><a>400客服电话：400-8585-666</a></dd>
+            <dd><a>电子邮箱：bmpaotui@163.com</a></dd>
+            <dd><a>工作时间：早8：00-晚21：00</a></dd>
+        </dl>
+        <dl class="dl-nav">
+            <dt>官方微信</dt>
+            <dd>
+                <img alt="同城跑腿" th:src="@{/image/pic/erweima.png}" style="width: 100px;height: 100px">
+            </dd>
+        </dl>
+    </div>
+</div>
 </body>
 </html>

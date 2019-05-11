@@ -1,7 +1,9 @@
 package com.design.helpPlatform.controller;
 
+import com.design.helpPlatform.entity.BuyInfoEntity;
 import com.design.helpPlatform.entity.GoodsEntity;
 import com.design.helpPlatform.entity.ResponseMap;
+import com.design.helpPlatform.service.BuyService;
 import com.design.helpPlatform.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class BuyController {
 
     @Autowired
     ShopService shopService;
+    @Autowired
+    BuyService buyService;
+
 
     @RequestMapping("/makeOrder")
     public String makeOrderView(){
@@ -116,6 +121,28 @@ public class BuyController {
         }
         return new ResponseMap(true,"success","success");
 
+    }
+
+
+    /**
+     * 代买下单
+     * @return
+     */
+    @RequestMapping("/orderNow")
+    @ResponseBody
+    public ResponseMap orderNowAction(BuyInfoEntity buyInfoEntity , HttpSession session){
+
+        try {
+            boolean flag = buyService.addOrderNow(buyInfoEntity,session);
+            if(flag){
+                //如果下单成功，清空购物车
+                session.setAttribute("buyCar","");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseMap(false,null,e.getMessage());
+        }
+        return new ResponseMap(true,"success","创建订单成功！");
     }
 
 

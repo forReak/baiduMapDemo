@@ -43,6 +43,26 @@
         )
     </insert>
 
+    <insert id="insertBeach" parameterType="List"  useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="t_order_detail"/>
+        values
+        <foreach collection="list" item="insertBeach" separator="," index="index">
+            (
+            #{insertBeach.id},
+            #{insertBeach.orderNo},
+            #{insertBeach.orderWeight},
+            #{insertBeach.goodsType},
+            #{insertBeach.goodsPrice},
+            #{insertBeach.goodsName},
+            #{insertBeach.goodsSpec},
+            #{insertBeach.goodsMoney},
+            #{insertBeach.goodsRemark},
+            #{insertBeach.goodsPic},
+            #{insertBeach.goodsNum}
+            )
+        </foreach>
+    </insert>
+
 
 
 </mapper>

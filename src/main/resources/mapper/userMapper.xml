@@ -33,6 +33,11 @@
         and password = #{password}
     </select>
 
+    <select id="getUserById" parameterType="Integer" resultMap="UserMap">
+        select <include refid="user_base_column"/>
+        from <include refid="t_user"/>
+        where id = #{userId}
+    </select>
 
 
     <insert id="insertUserByUserInfo" parameterType="com.design.helpPlatform.entity.User" useGeneratedKeys="true" keyProperty="id">

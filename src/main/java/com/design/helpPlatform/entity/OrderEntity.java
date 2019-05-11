@@ -22,7 +22,7 @@ public class OrderEntity {
     private Timestamp orderStartTime;
     private Timestamp orderRiderSendTime;
     private Timestamp orderUesrCheckTime;
-    private Integer orderContentId;
+    private Integer orderContentId;//空
     private String startDetailPos;
     private String endDetailPos;
     private String sendType;

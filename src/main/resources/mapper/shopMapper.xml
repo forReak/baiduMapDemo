@@ -25,5 +25,10 @@
         where shop_url = #{url}
     </select>
 
+    <select id="getShopInfoById" parameterType="Integer" resultMap="ShopMap">
+        select <include refid="base_column"/>
+        from <include refid="t_shop"/>
+        where id = #{shopId}
+    </select>
 
 </mapper>

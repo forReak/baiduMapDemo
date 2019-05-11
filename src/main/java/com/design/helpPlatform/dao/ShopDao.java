@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface ShopDao {
 
     ShopEntity getShopInfoByUrl(String url);
+
+    ShopEntity getShopInfoById(Integer shopId);
 }

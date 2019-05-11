@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>mapDesign</groupId>
-    <artifactId>baiduMapDesign</artifactId>
+    <artifactId>baiduMapDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <build>

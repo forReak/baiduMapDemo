@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.design.helpPlatform.util.Util.getOrderNo;
+
 
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
@@ -115,20 +117,5 @@ public class DeliveryServiceImpl implements DeliveryService {
         return i;
     }
 
-    /**
-     * 新增订单时生成订单号 根据当前时间和用户id进行创建
-     * @param userId
-     * @return
-     */
-    private String getOrderNo(Integer userId){
-        LocalDateTime now = LocalDateTime.now();
-        int year = now.getYear();
-        int monthValue = now.getMonthValue();
-        int dayOfMonth = now.getDayOfMonth();
-        int hour = now.getHour();
-        int minute = now.getMinute();
-        int second = now.getSecond();
-        return "OD"+ year+monthValue+dayOfMonth+hour+minute+second+userId;
 
-    }
 }

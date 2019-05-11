@@ -166,14 +166,47 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 10px">
-            <div class="col-md-6 mb-3">
-                <button class="btn btn-primary btn-lg btn-block"  data-toggle="modal" data-target="#buyCar" onclick="showBuyCar()">购物车</button>
-            </div>
-            <div class="col-md-6 mb-3">
-                <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#orderInfo"  onclick="count()">结算</button>
+        <hr class="mb-4">
+        <h4 class="mb-3">收件信息</h4>
+            <div class="needs-validation" novalidate="">
+                <div class="mb-3">
+                    <label for="reciveAddr">收件地址</label>
+                    <input type="text" class="form-control" id="reciveAddr" name="reciveAddr" placeholder="请填写收件人地址：" required="">
+                    <div class="invalid-feedback">
+                        请输入正确的地址信息
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="reciveAddrDetailPos">详细地址：</label>
+                    <input type="text" class="form-control" name="reciveAddrDetailPos" id="reciveAddrDetailPos" placeholder="请填写详细地址：" required="">
+                    <div class="invalid-feedback">
+                        请输入正确的地址信息
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="reciveName">联系人姓名：</label>
+                    <input type="text" class="form-control" name="reciveName" id="reciveName" placeholder="联系人姓名：" required="">
+                    <div class="invalid-feedback">
+                        请输入联系人姓名
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="recivePhone">联系人电话：</label>
+                    <input type="text" class="form-control" name="recivePhone" id="recivePhone" placeholder="联系人电话：" required="">
+                    <div class="invalid-feedback">
+                        请输入联系人电话
+                    </div>
+                </div>
             </div>
 
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-6 mb-3">
+                    <button class="btn btn-primary btn-lg btn-block"  data-toggle="modal" data-target="#buyCar" onclick="showBuyCar()">购物车</button>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <button class="btn btn-primary btn-lg btn-block" data-toggle="modal"  onclick="count()">结算</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -202,28 +235,25 @@
             </div>
             <!-- 模态框主体 -->
             <div class="modal-body">
+                <div class="form-group">
+                    <label >----------------------------------------</label>
+                </div>
                 <form id="orderInfoForm"></form>
                 <div class="form-group">
-                    <label for="reciveAddr">收件地址:</label>
-                    <input type="text" class="form-control" id="reciveAddr" name="reciveAddr">
+                    <label >----------------------------------------</label>
                 </div>
                 <div class="form-group">
-                    <label for="reciveAddrDetail">具体地址:</label>
-                    <input type="text" class="form-control" id="reciveAddrDetail" name="reciveAddrDetail">
+                    <label >收货地址:</label><span class="t_ad"><span id="f_r">10</span></span>
                 </div>
                 <div class="form-group">
-                    <label for="recivePeople">联系人:</label>
-                    <input type="text" class="form-control" id="recivePeople" name="recivePeople">
+                    <label >详细地址:</label><span class="t_ad"><span id="f_r_d">10</span></span>
                 </div>
                 <div class="form-group">
-                    <label for="recivePhone">联系电话:</label>
-                    <input type="text" class="form-control" id="recivePhone" name="recivePhone">
+                    <label >联系人姓名:</label><span class="t_ad"><span id="f_r_n">10</span></span>
                 </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="same-address">
-                    <label class="custom-control-label" for="same-address">保存到地址薄</label>
+                <div class="form-group">
+                    <label >联系人电话:</label><span class="t_ad"><span id="f_r_p">10</span></span>
                 </div>
-                <hr class="mb-4">
                 <div class="form-group">
                     <label >运费金额:</label><span class="t_Money"><span id="sendMoney">10</span>¥</span>
                 </div>
@@ -295,7 +325,7 @@
     });
     bc.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
         var _value = e.item.value;
-        startValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+        endValue = _value.province + _value.city + _value.district + _value.street + _value.business;
         setEndPlace();
     });
 
@@ -692,6 +722,30 @@
 
 
     function count(){
+
+        var reciveAddr = $("#reciveAddr").val().trim();
+        var reciveAddrDetailPos = $("#reciveAddrDetailPos").val().trim();
+        var reciveName = $("#reciveName").val().trim();
+        var recivePhone = $("#recivePhone").val().trim();
+
+        if(reciveAddr===null||reciveAddr===""||reciveAddr===undefined){
+            alert("请输入收货人地址");
+            return false;
+        }
+        if(reciveAddrDetailPos===null||reciveAddrDetailPos===""||reciveAddrDetailPos===undefined){
+            alert("请输入收货人详细地址");
+            return false;
+        }
+        if(reciveName===null||reciveName===""||reciveName===undefined){
+            alert("请输入收货人姓名");
+            return false;
+        }
+        if(recivePhone===null||recivePhone===""||recivePhone===undefined){
+            alert("请输入收货人联系方式");
+            return false;
+        }
+        $('#orderInfo').modal('show');
+
         //请求订单
         $.ajax({
             type: "post",
@@ -708,6 +762,11 @@
                         var goodsNum = result.result.goodsNum;
                         console.log(goodsInfo);
                         console.log(goodsNum);
+
+                        $("#f_r").html(reciveAddr);
+                        $("#f_r_d").html(reciveAddrDetailPos);
+                        $("#f_r_n").html(reciveName);
+                        $("#f_r_p").html(recivePhone);
 
                         showCarInfo(goodsInfo,goodsNum,"orderInfoForm");
 
@@ -728,8 +787,53 @@
 
     }
 
-
+    /**
+     * 支付页面
+     */
     function pay(){
+        if(shopPos==null){
+            alert("无法获取商家位置，请搜索商家并在地图中点击标注～");
+            return false;
+        }
+        console.log("支付页面 商店位置："+JSON.stringify(shopPos));
+        console.log("支付页面 寄送位置："+JSON.stringify(endPos));
+        var f_r   = $("#f_r"  ).html();
+        var f_r_d = $("#f_r_d").html();
+        var f_r_n = $("#f_r_n").html();
+        var f_r_p = $("#f_r_p").html();
+        console.log(f_r);
+        console.log(f_r_d);
+        console.log(f_r_n);
+        console.log(f_r_p);
+
+        var par = {
+            reciveAddress:f_r,
+            reciveAddressDetail:f_r_d,
+            reciveName:f_r_n,
+            recivePhone:f_r_p,
+            recivePos:endPos.lng+" "+endPos.lat,
+            startPos:shopPos.lng+" "+shopPos.lat
+        };
+
+
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/buy/orderNow",
+            data: par,
+            dataType: "json",
+            success: function (result) {
+                if(result.flag){
+                    alert("下单成功！");
+                    // window.location.href=ctxPath+"/";
+                }
+                else{
+                    alert(result.message);
+                }
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
 
     }
 

@@ -2,6 +2,7 @@ package com.design.helpPlatform.util;
 
 
 import java.security.MessageDigest;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -130,5 +131,22 @@ public class Util {
             sb.append(list.get(i).toString()).append(separator);
         }
         return sb.toString().substring(0, sb.toString().length() - 1);
+    }
+
+    /**
+     * 新增订单时生成订单号 根据当前时间和用户id进行创建
+     * @param userId
+     * @return
+     */
+    public static String getOrderNo(Integer userId){
+        LocalDateTime now = LocalDateTime.now();
+        int year = now.getYear();
+        int monthValue = now.getMonthValue();
+        int dayOfMonth = now.getDayOfMonth();
+        int hour = now.getHour();
+        int minute = now.getMinute();
+        int second = now.getSecond();
+        return "OD"+ year+monthValue+dayOfMonth+hour+minute+second+userId;
+
     }
 }

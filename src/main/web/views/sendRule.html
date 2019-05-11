@@ -1,11 +1,280 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
-    <title>配送规则</title>
-    <th:block th:include="common/base::proejct-context" th:remove="tag"></th:block>
+    <title>Title</title>
+    <th:block th:include="common/base::proejct-context" th:remove="tag"/>
+
+    <script>
+        /*$(".Sidebar__menu-item___1f6bl").mouseover(function () {
+            $(".Sidebar__menu-item___1f6bl").css("background-color","blue");
+        })*/
+        function span1() {
+            $(".Insurance__content___XgxV8").remove();
+            $(".full-width").append("<div class=\"Insurance__content___XgxV8\">\n" +
+                "            <h2>计价规则</h2>\n" +
+                "            <p>1. 郑州：起步价8元。</p>\n" +
+                "            <p>2. 西安、杭州、南京、长沙、合肥：2公里10元。</p>\n" +
+                "            <p>3. 北京、成都：起步价12元。</p>\n" +
+                "            <p>4. 深圳：起步价5公里18元。</p>\n" +
+                "            <p>5. 3-10公里，每加一公里加一元，不超过25公斤不加价，一个小时送到。</p>\n" +
+                "        </div>");
+
+        }
+
+        function span2() {
+            $(".Insurance__content___XgxV8").remove();
+            $(".full-width").append("<div class=\"Insurance__content___XgxV8\">\n" +
+                "            <h2>保价协议</h2>\n" +
+                "            <p>1. 您在选择帮买商户平台发布配送需求时，可以对您将要配送的物品进行价值认定及选择保价服务。</p>\n" +
+                "            <p>2. 请您悉知帮买商户平台只提供信息发布服务，并不直接提供物品配送及保价服务。</p>\n" +
+                "            <p>3. 保价功能由您自由选择，我们提供以下3种保价方案：</p>\n" +
+                "            <div>\n" +
+                "                <p>（1）您选择1元保价，若物品出现丢失或损毁，最高可赔付100元。</p>\n" +
+                "                <p>（2）您选择3元保价，若物品出现丢失或损毁，最高可赔付300元。</p>\n" +
+                "                <p>（3）您选择5元保价，若物品出现丢失或损毁，最高可赔付1000元。</p>\n" +
+                "            </div>\n" +
+                "            <p>4. 当您对寄递物品选择保价后：如出现物品丢失或损毁则按照您提供的相关配送物品信息及价值凭证进行赔偿，赔偿金额不超过您选择的保价方案的最高赔付金额。</p>\n" +
+                "            <p>5. 以下物品不在保价范围：</p>\n" +
+                "            <div>\n" +
+                "                <p>（1）工艺品（包括各类雕刻、编织、艺术品、刺绣、古董、字画、瓷器、玉雕及其他玉石制品等）、现金、有价证券、珠宝、具有收藏价值的货物以及文件、账册、图表、技术资料、计算机软件、计算机数据资料等无法鉴定价值的财产；</p>\n" +
+                "                <p>（2）文件证件丢失，仅赔偿补办相关证件的费用；</p>\n" +
+                "                <p>（3）鲜活动物、植物、农作物。</p>\n" +
+                "            </div>\n" +
+                "            <p>6. 若您选择不保价，若物品出现丢失或损毁，最高可获得平台30元优惠券。（优惠券直接存入用户账户中）。</p>\n" +
+                "            <p>温馨提示：</p>\n" +
+                "            <div>\n" +
+                "                <p>（1）建议您根据配送物品价值进行保价。</p>\n" +
+                "                <p>（2）如您发现物品送达之后损坏时，请您第一时间联系平台客服。</p>\n" +
+                "                <p>（3）本条款为《注册协议》的重要组成部分，对缔约各方均具有约束力。</p>\n" +
+                "            </div>\n" +
+                "        </div>");
+        }
+
+        function span3() {
+            $(".Insurance__content___XgxV8").remove();
+            $(".full-width").append("<div class=\"Insurance__content___XgxV8\">\n" +
+                "            <h2>超时赔付</h2>\n" +
+                "            <p>1. 首先需要了解订单是由商家自配送还是由帮买包配送的，一般而言，商家自配送的接单效率低，常常会出现超时的状况，可是由于配送方面不由帮买参与，所以没有超时赔付原则。这时您可以看看提交订单是否有写明送餐超时的赔偿条款，如果有相关条款按照条款索赔就无需多言，商家自会索赔。如果没有相关规则，建议可以在平台对用餐配送的服务情况进行差评或留言等，或者直接联系商家，对配送服务进行投诉，从而协商赔付事宜。</p>\n" +
+                "            <p>2. 超时赔付模式：商家承诺一个送达时间和一个折扣，从用户下单时间开始计算（一般超时计算规则为40分钟+8分钟），如果外卖超过了承诺时间才送到，该份外卖按照折扣价收取费用。由于恶劣天气、某些美食烹调时间过长、或者其他因素，商家会选择性的延长承诺时间或者不做承诺。另外需要注意的是预订单不参与超时赔付。\n" +
+                "            </p>\n" +
+                "            <p>3. 赔付方：如果是商家接单了，超过预计配送到达的时间还没发货，就是商家赔付。而如果商家及时把订单发给了配送员，由于配送员的原因导致延时就是由配送员赔付。如果配送员拒付，就是帮买外卖先行赔付，后在配送员的账户里扣除。\n" +
+                "</p>\n" +
+                "            <p>4. 赔付方式：一般超时赔付的款项会在一个工作日内，直接返还到您的帮买账户余额，可以检查下是否到账。</p>\n" +
+                "        </div>");
+        }
+
+        function span4() {
+            $(".Insurance__content___XgxV8").remove();
+            $(".full-width").append("<div class=\"Insurance__content___XgxV8\">\n" +
+                "    <h2>常见问题</h2>\n" +
+                "    <div role=\"tablist\" class=\"panel-group\">\n" +
+                "\n" +
+                "        <div class=\"FAQ__question___3x_xg panel panel-default\">\n" +
+                "            <div class=\"panel-heading\">\n" +
+                "                <h4 role=\"presentation\" class=\"panel-title\">\n" +
+                "                    帮买服务时间？\n" +
+                "                </h4>\n" +
+                "                <p>帮买提供24小时服务，节假日正常服务，全年无休，您有需要可以随时下单；“1小时达”业务客服人员的工作时间是9：00至晚21：00，在此期间我们全程监控您的订单，可以确保安全快速完成。</p>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"FAQ__question___3x_xg panel panel-default\">\n" +
+                "            <div class=\"panel-heading\">\n" +
+                "                <h4 role=\"presentation\" class=\"panel-title\">\n" +
+                "                    帮买的时效和收费是怎样的？是否可以预约？\n" +
+                "\n" +
+                "                </h4>\n" +
+                "                <p>帮买是即时服务，下单后一般15分钟内上门取件。</p>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"FAQ__question___3x_xg panel panel-default\">\n" +
+                "            <div class=\"panel-heading\">\n" +
+                "                <h4 role=\"presentation\" class=\"panel-title\">\n" +
+                "                    帮买的时效和收费是怎样的？是否可以预约？\n" +
+                "                </h4>\n" +
+                "                <p>批量下单超过5分钟未支付，订单将自动取消，请重新下单；</p>\n" +
+                "                <p>若微信扫码支付失败，请在帮买收银台重新扫码支付；</p>\n" +
+                "                <p>若支付宝支付失败，请在帮买收银台重新支付；</p>\n" +
+                "                <p>余额不足，请使用微信或支付宝支付，或者在“帮买”公众号上进行充值后进行付款；</p>\n" +
+                "                <p>大客户（总子账号）商家余额不足，请联系总账号管理充值。</p>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"FAQ__question___3x_xg panel panel-default\">\n" +
+                "            <div class=\"panel-heading\">\n" +
+                "                <h4 role=\"presentation\" class=\"panel-title\">\n" +
+                "                    是否支持到付？\n" +
+                "                </h4>\n" +
+                "                <p>通过微信下单需直接使用微信支付，帮买目前不支持到付！</p>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"FAQ__question___3x_xg panel panel-default\">\n" +
+                "            <div class=\"panel-heading\">\n" +
+                "                <h4 role=\"presentation\" class=\"panel-title\">\n" +
+                "                    是否支持代收货款？\n" +
+                "                </h4>\n" +
+                "                <p>如需代收货款服务，请提前与帮买骑士协商让其先垫付给您，但不支持大额的代收。</p>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"FAQ__question___3x_xg panel panel-default\">\n" +
+                "            <div class=\"panel-heading\">\n" +
+                "                <h4 role=\"presentation\" class=\"panel-title\">\n" +
+                "                    是否支持代购或垫付？\n" +
+                "                </h4>\n" +
+                "                <p>1小时达目前不支持大额垫付，若您通过微信下单需要小额代购或垫付，请在订单备注内说明您的需求，如果有帮买骑士愿意为您服务，会在抢单后先跟寄件人联系，到时您可以跟帮买骑士详细沟通代购事宜。</p>\n" +
+                "            </div>\n" +
+                "        </div>");
+        }
+
+    </script>
+    <style type="text/css">
+        .Root__flex___3FyxW {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            min-height: 600px;
+
+        }
+        .card {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 2px;
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+        /*左边大的div*/
+        .Sidebar__sidebar___2BiGf {
+            padding-left: 50px;
+            padding-top: 30px;
+            height: 100%;
+            width: 200px;
+            background: #fff;
+            border-right: 1px solid #ddd;
+            margin-left: -15px;
+        }
+        .Sidebar__sidebar___2BiGf .Sidebar__sidebar-body___1IZPP {
+            height: 100%;
+            overflow: auto;
+        }
+        /*常见问题*/
+        .Sidebar__menu-item___1f6bl {
+            color: #333;
+            font-size: 16px;
+            padding: 15px 30px;
+            padding-right: 25px;
+        }
+
+        .full-width {
+            width: 100% !important;
+        }
+        .Insurance__content___XgxV8 {
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-top: 10px;
+        }
+        h2{
+            text-align: center;
+        }
+        p{
+            line-height: 30px;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
+
 <body>
-配送规则
+<div class="card Root__flex___3FyxW">
+    <div>
+        <div class="Sidebar__sidebar___2BiGf">
+            <div class="Sidebar__sidebar-body___1IZPP">
+                <div>
+                    <div id="total4" class="Sidebar__menu-item___1f6bl">
+                        <span onclick="span4()">常见问题</span>
+                    </div>
+                </div>
+                <div>
+                    <div id="total1" class="Sidebar__menu-item___1f6bl">
+                        <span onclick="span1()">计价规则</span>
+                    </div>
+                </div>
+                <div>
+                    <div id="total2" class="Sidebar__menu-item___1f6bl">
+                        <span onclick="span2()">保价协议</span>
+                    </div>
+                </div>
+                <div>
+                    <div id="total3" class="Sidebar__menu-item___1f6bl">
+                        <span onclick="span3()">超时赔付</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="full-width">
+
+        <div class="Insurance__content___XgxV8">
+            <h2>常见问题</h2>
+            <div role="tablist" class="panel-group">
+
+                <div class="FAQ__question___3x_xg panel panel-default">
+                <div class="panel-heading">
+                    <h4 role="presentation" class="panel-title">
+                        帮买服务时间？
+                        </h4>
+                    <p>帮买提供24小时服务，节假日正常服务，全年无休，您有需要可以随时下单；“1小时达”业务客服人员的工作时间是9：00至晚21：00，在此期间我们全程监控您的订单，可以确保安全快速完成。</p>
+                    </div>
+                </div>
+            <div class="FAQ__question___3x_xg panel panel-default">
+            <div class="panel-heading">
+                <h4 role="presentation" class="panel-title">
+                    帮买的时效和收费是怎样的？是否可以预约？
+
+                    </h4>
+                 <p>帮买是即时服务，下单后一般15分钟内上门取件。</p>
+                </div>
+            </div>
+        <div class="FAQ__question___3x_xg panel panel-default">
+        <div class="panel-heading">
+            <h4 role="presentation" class="panel-title">
+            帮买的时效和收费是怎样的？是否可以预约？
+            </h4>
+        <p>批量下单超过5分钟未支付，订单将自动取消，请重新下单；</p>
+        <p>若微信扫码支付失败，请在帮买收银台重新扫码支付；</p>
+        <p>若支付宝支付失败，请在帮买收银台重新支付；</p>
+        <p>余额不足，请使用微信或支付宝支付，或者在“帮买”公众号上进行充值后进行付款；</p>
+        <p>大客户（总子账号）商家余额不足，请联系总账号管理充值。</p>
+        </div>
+        </div>
+    <div class="FAQ__question___3x_xg panel panel-default">
+    <div class="panel-heading">
+    <h4 role="presentation" class="panel-title">
+        是否支持到付？
+        </h4>
+    <p>通过微信下单需直接使用微信支付，帮买目前不支持到付！</p>
+    </div>
+    </div>
+<div class="FAQ__question___3x_xg panel panel-default">
+<div class="panel-heading">
+    <h4 role="presentation" class="panel-title">
+        是否支持代收货款？
+        </h4>
+    <p>如需代收货款服务，请提前与帮买骑士协商让其先垫付给您，但不支持大额的代收。</p>
+    </div>
+</div>
+<div class="FAQ__question___3x_xg panel panel-default">
+<div class="panel-heading">
+    <h4 role="presentation" class="panel-title">
+        是否支持代购或垫付？
+    </h4>
+    <p>1小时达目前不支持大额垫付，若您通过微信下单需要小额代购或垫付，请在订单备注内说明您的需求，如果有帮买骑士愿意为您服务，会在抢单后先跟寄件人联系，到时您可以跟帮买骑士详细沟通代购事宜。</p>
+    </div>
+</div>
+    </div>
+</div>
+
+    </div>
+</div>
+
 </body>
 </html>

@@ -31,4 +31,9 @@ public interface UserDao {
      */
     User getUserByUseNameAndPassword(Map map);
 
+    /**
+     * 根据id查用户
+     * @return
+     */
+    User getUserById(Integer userId);
 }

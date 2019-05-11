@@ -10,11 +10,35 @@
     .r{
         color:red;
     }
+
+    #waitOrder{
+        font-size: 14px;
+    }
 </style>
 <br>
-接单</br>
-<span class="r">待接单：</span></br>
-<div id="waitOrder"></div>
+
+<div class="tab-pane fade  active show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr style="font-size: 14px">
+            <th>订单号</th>
+            <th>下单时间</th>
+            <th>寄件地址</th>
+            <th>寄件详细地址</th>
+            <th>寄件人</th>
+            <th>寄件人手机</th>
+            <th>收件地址</th>
+            <th>收件详细地址</th>
+            <th>收件人</th>
+            <th>收件人手机</th>
+            <th style="width: 100px">接单</th>
+        </tr>
+        </thead>
+        <tbody id="waitOrder">
+
+        </tbody>
+    </table>
+</div>
 </body>
 
 <script type="text/javascript" th:inline="javascript">
@@ -54,18 +78,22 @@
             var canal = "";
             for(let i = 0 ; i < orderInfo.length; i++){
                 let oneOrder = orderInfo[i];
-                var str = "订单信息---订单号："+oneOrder.orderNo+
-                    "。 省份："+ oneOrder.orderCity+
-                    "。 城市："+ oneOrder.orderPri+
-                    "。 邮编："+ oneOrder.orderZip+
-                    "。 寄件地址："+ oneOrder.startPos+
-                    "。 寄件详细地址："+ oneOrder.startDetailPos+
-                    "。 寄件人："+ oneOrder.sendName+
-                    "。 寄件人手机："+ oneOrder.sendPhone+
-                    "。 收件地址："+ oneOrder.endPos+
-                    "。 收件详细地址："+ oneOrder.endDetailPos+
-                    "。 收件人："+ oneOrder.reciveName+
-                    "。 收件人手机："+ oneOrder.recivePhone +"<a style='background-color: #9fcdff;font-size: large' type='"+oneOrder.orderNo+"' onclick='check(this)'>接单</a></br>";
+                var sendPhone = oneOrder.sendPhone===null?'':oneOrder.sendPhone;
+
+                var str =
+                    "<tr>" +
+                    "<td>"+oneOrder.orderNo+"</td>"+
+                    "<td>"+ getLocalTime(oneOrder.orderCreateTime)+"</td>"+
+                    "<td>"+ oneOrder.startPos+"</td>"+
+                    "<td>"+ oneOrder.startDetailPos+"</td>"+
+                    "<td>"+ oneOrder.sendName+"</td>"+
+                    "<td>"+ sendPhone +"</td>"+
+                    "<td>"+ oneOrder.endPos+"</td>"+
+                    "<td>"+ oneOrder.endDetailPos+"</td>"+
+                    "<td>"+ oneOrder.reciveName+"</td>"+
+                    "<td>"+ oneOrder.recivePhone +"</td>"+
+                    "<td ><a style='background-color: #2d61b3;color:white;font-size: large' type='"+oneOrder.orderNo+"' onclick='check(this)'>接单</a></td>"+
+                    "</tr>";
 
                 if(oneOrder.orderStatus===10){
                     wait += str;
@@ -81,6 +109,10 @@
         if(checkget){
             window.location.href=ctxPath + "/gotoNav" + "?orderNo="+data.type;
         }
+    }
+
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS) ).toLocaleString().replace(/:\d{1,2}$/,' ');
     }
 </script>
 

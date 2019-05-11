@@ -130,10 +130,10 @@ public class BuyController {
      */
     @RequestMapping("/orderNow")
     @ResponseBody
-    public ResponseMap orderNowAction(BuyInfoEntity buyInfoEntity , HttpSession session){
+    public ResponseMap orderNow(BuyInfoEntity buyInfoEntity , HttpSession session){
 
         try {
-            boolean flag = buyService.addOrderNow(buyInfoEntity,session);
+            boolean flag = buyService.orderNow(buyInfoEntity,session);
             if(flag){
                 //如果下单成功，清空购物车
                 session.setAttribute("buyCar","");

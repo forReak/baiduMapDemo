@@ -1,9 +1,10 @@
 package com.design.helpPlatform.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class OrderEntity {
+public class OrderEntity implements Serializable {
     private Integer id;
     private String orderNo;
     private Integer orderOwner;

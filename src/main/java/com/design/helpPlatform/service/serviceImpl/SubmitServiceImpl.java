@@ -5,15 +5,18 @@ import com.design.helpPlatform.entity.User;
 import com.design.helpPlatform.service.SubmitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.design.helpPlatform.util.Util.getMD5ofStr;
 
 @Service
+@Transactional
 public class SubmitServiceImpl implements SubmitService {
 
     @Autowired
     UserDao userDao;
 
+    @Transactional
     @Override
     public boolean submit(String userName, String password, String phone, String nickName, String rider) {
         //根据用户名查找用户信息

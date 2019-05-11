@@ -7,5 +7,5 @@ import javax.servlet.http.HttpSession;
 public interface BuyService {
 
 
-    boolean addOrderNow(BuyInfoEntity buyInfoEntity, HttpSession session);
+    boolean orderNow(BuyInfoEntity buyInfoEntity, HttpSession session);
 }

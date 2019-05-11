@@ -23,6 +23,7 @@ import static com.design.helpPlatform.util.Util.getOrderNo;
 
 
 @Service
+@Transactional
 public class DeliveryServiceImpl implements DeliveryService {
 
     @Autowired
@@ -31,7 +32,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     OrderDao orderDao;
 
     @Override
-    public int saveOrder(OrderInfo orderInfo, HttpSession session) {
+    public int orderNow(OrderInfo orderInfo, HttpSession session) {
         int userId = (Integer)session.getAttribute("userId");
 
         //保存订单主表

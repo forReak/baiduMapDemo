@@ -36,13 +36,46 @@
     <sql id="user_base_column">
         id,order_no,order_owner,start_pos,end_pos,start_gps,end_gps,send_name,send_phone,
         recive_name,recive_phone,order_type,order_status,order_create_time,order_rider_id,
-        order_start_time,order_rider_send_time,order_user_check_time,start_detail_pos,end_detail_pos,
+        order_start_time,order_rider_send_time,order_user_check_time,order_content_id,start_detail_pos,end_detail_pos,
         send_type,send_remark,order_city,order_pri,order_zip
     </sql>
 
 
 
     <insert id="insertOrderDao" parameterType="com.design.helpPlatform.entity.OrderEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="t_order"/>
+        values (
+        #{id},
+        #{orderNo},
+        #{orderOwner},
+        #{startPos},
+        #{endPos},
+        #{startGps},
+        #{endGps},
+        #{sendName},
+        #{sendPhone},
+        #{reciveName},
+        #{recivePhone},
+        #{orderType},
+        #{orderStatus},
+        #{orderCreateTime},
+        #{orderRiderId},
+        #{orderStartTime},
+        #{orderRiderSendTime},
+        #{orderUesrCheckTime},
+        #{orderContentId},
+        #{startDetailPos},
+        #{endDetailPos},
+        #{sendType},
+        #{sendRemark},
+        #{orderCity},
+        #{orderPri},
+        #{orderZip}
+        )
+    </insert>
+
+
+    <insert id="ioi" parameterType="com.design.helpPlatform.entity.OrderEntity" useGeneratedKeys="true" keyProperty="id">
         insert into <include refid="t_order"/>
         values (
         #{id},

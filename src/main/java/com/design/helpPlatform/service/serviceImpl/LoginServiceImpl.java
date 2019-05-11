@@ -14,7 +14,7 @@ import java.util.Map;
 import static com.design.helpPlatform.util.Util.getMD5ofStr;
 
 @Service
-
+@Transactional
 public class LoginServiceImpl implements LoginService {
 
     @Autowired

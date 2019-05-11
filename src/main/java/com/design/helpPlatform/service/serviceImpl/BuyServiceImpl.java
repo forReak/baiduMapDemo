@@ -6,6 +6,7 @@ import com.design.helpPlatform.service.BuyService;
 import com.design.helpPlatform.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ import static com.design.helpPlatform.util.Util.getOrderNo;
 import static java.util.stream.Collectors.counting;
 
 @Service
+@Transactional
 public class BuyServiceImpl implements BuyService {
 
     @Autowired
@@ -32,7 +34,7 @@ public class BuyServiceImpl implements BuyService {
 
 
     @Override
-    public boolean addOrderNow(BuyInfoEntity buyInfoEntity, HttpSession session) {
+    public boolean orderNow(BuyInfoEntity buyInfoEntity, HttpSession session) {
 
         int userId = (Integer)session.getAttribute("userId");
 
@@ -55,27 +57,28 @@ public class BuyServiceImpl implements BuyService {
         //获取商家信息
         ShopEntity shopEntity = shopDao.getShopInfoById(shopId);
 
-        //创建订单信息
-        OrderEntity orderEntity = new OrderEntity();
+        OrderEntity order = new OrderEntity();
+
         //获取订单号
         String orderNo = getOrderNo(userId);
-        orderEntity.setOrderNo(orderNo);
-        orderEntity.setOrderOwner(userId);
-        orderEntity.setStartPos(shopEntity.getShopAddr());
-        orderEntity.setEndPos(buyInfoEntity.getReciveAddress());
-        orderEntity.setStartGps(buyInfoEntity.getStartPos());
-        orderEntity.setEndGps(buyInfoEntity.getRecivePos());
-        orderEntity.setSendName(shopEntity.getShopName());
+        order.setOrderNo(orderNo);
+        order.setOrderOwner(userId);
+        order.setStartPos(shopEntity.getShopAddr());
+        order.setEndPos(buyInfoEntity.getReciveAddress());
+        order.setStartGps(buyInfoEntity.getStartPos());
+        order.setEndGps(buyInfoEntity.getRecivePos());
+        order.setSendName(shopEntity.getShopName());
 //        orderEntity.setSendPhone(shopEntity.get);
-        orderEntity.setReciveName(buyInfoEntity.getReciveName());
-        orderEntity.setRecivePhone(buyInfoEntity.getRecivePhone());
-        orderEntity.setOrderType("2");
-        orderEntity.setOrderStatus(10);
-        orderEntity.setOrderCreateTime(new Timestamp(System.currentTimeMillis()));
-        orderEntity.setStartDetailPos(shopEntity.getShopAddr());
-        orderEntity.setEndDetailPos(buyInfoEntity.getReciveAddressDetail());
+        order.setReciveName(buyInfoEntity.getReciveName());
+        order.setRecivePhone(buyInfoEntity.getRecivePhone());
+        order.setOrderType("2");
+        order.setOrderStatus(10);
+        order.setOrderCreateTime(new Timestamp(System.currentTimeMillis()));
+        order.setStartDetailPos(shopEntity.getShopAddr());
+        order.setEndDetailPos(buyInfoEntity.getReciveAddressDetail());
 //        orderEntity.setSendType();
-        int i = orderDao.insertOrderDao(orderEntity);
+//        int returnInt = orderDao.ioi(order);
+        int i = orderDao.insertOrderDao(order);
         if(i>0){
 
             List<OrderDetailEntity> orderDetailEntities = new ArrayList<>();

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DeliveryService {
 
-    int saveOrder(OrderInfo orderInfo, HttpSession session);
+    int orderNow(OrderInfo orderInfo, HttpSession session);
 
     List<OrderEntity> getOrderEntity(Integer userId);
 

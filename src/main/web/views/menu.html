@@ -51,7 +51,7 @@
             <a class="nav-link"  th:href="@{/login_view}" th:if="${session.loginedUser}==null">您好，请登录<span class="sr-only">(current)</span></a>
             <a class="nav-link" target="cusFrame"  th:href="@{/myCenter/myInfo}" th:if="${session.loginedUser}!=null" th:text="${session.loginedUser}"><span class="sr-only">(current)</span></a>
             <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+            <button class="btn btn-outline-success my-2 my-sm-0" type="addsubmit">Search</button>-->
         </form>
     </div>
 </nav>

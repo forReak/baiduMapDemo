@@ -24,4 +24,6 @@ public interface OrderDao {
     int updateOrderToSending(Map<String,Object> map);
 
     int updateOrderFinish(Map map);
+
+    int ioi(OrderEntity orderEntity);
 }

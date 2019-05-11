@@ -9,11 +9,13 @@ import com.design.helpPlatform.entity.ShopTypeEntity;
 import com.design.helpPlatform.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class ShopServiceImpl implements ShopService {
 
     @Autowired

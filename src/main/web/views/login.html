@@ -2,39 +2,68 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta name="viewport"/>
     <title>登陆</title>
     <th:block th:include="common/base::proejct-context" th:remove="tag"/>
 </head>
 
 <style>
 
-    #banner{
-        font-size: 2rem;
-        margin-top: 5rem;
-        margin-left:38rem;
-    }
 
-    input{
-        border: 0.02rem solid black;
-    }
-    #loginForm{
-        margin-top: 4rem;
-        margin-left: 35rem;
-    }
+ body {
+     padding-top: 40px;
+     padding-bottom: 40px;
+     background-color: #eee;
+ }
 
-    .title{
-        margin-top: 0.5rem;
-    }
+ .form-signin {
+     max-width: 330px;
+     padding: 15px;
+     margin: 100px auto;
+ }
+ .form-signin .form-signin-heading,
+ .form-signin .checkbox {
+     margin-bottom: 10px;
+ }
+ .form-signin .checkbox {
+     font-weight: normal;
+     font-size: 15px;
+ }
+ .form-signin .form-control {
+     position: relative;
+     height: auto;
+     -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     box-sizing: border-box;
+     padding: 10px;
+     font-size: 16px;
+ }
+ .form-signin .form-control:focus {
+     z-index: 2;
+ }
+ .form-signin input[type="email"] {
+     margin-bottom: -1px;
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0;
+ }
+ .form-signin input[type="password"] {
+     margin-bottom: 10px;
+     border-top-left-radius: 0;
+     border-top-right-radius: 0;
+ }
+ .btn-primary {
+     background-color: #9BCD9B;
+     border-color: #9BCD9B;
+ }
+ .btn-primary:hover {
+     background-color: #7CCD7C;
+     border-color: #7CCD7C;
+ }
 
-    #loginBtn{
-        margin-left: 4rem;
-    }
 
 </style>
 <body>
-<canvas id="canvas"></canvas>
-
+<!--
 <div id="banner">
     帮买平台
 </div>
@@ -50,7 +79,20 @@
         <button class="btn-primary" id="submitBtn" onclick="submit()">注册</button>
     </div>
 </div>
+-->
+<div class="container">
+    <div class="form-signin" >
+    <h1 class="form-signin-heading">帮买平台</h1>
+    <label for="userName" class="sr-only">Email address</label>
+    <input type="text" id="userName" class="form-control" placeholder="请输入用户名" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input style="margin-top: 10px" type="password" id="password" class="form-control" placeholder="请输入密码" required>
 
+    <button class="btn btn-lg btn-primary btn-block" onclick="login()" id="loginBtn">登陆</button>
+    <button class="btn btn-lg btn-primary btn-block" onclick="submit()" id="submitBtn" >注册</button>
+    </div>
+
+</div>
 </body>
 
 <script type="text/javascript" th:inline="javascript">

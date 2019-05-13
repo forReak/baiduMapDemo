@@ -9,36 +9,59 @@
 
 <style>
 
-    #banner{
-        font-size: 2rem;
-        margin-top: 5rem;
-        margin-left:38rem;
+    body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #eee;
     }
 
-    input{
-        border: 0.02rem solid black;
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 100px auto;
     }
-    #loginForm{
-        margin-top: 4rem;
-        margin-left: 35rem;
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+        margin-bottom: 10px;
     }
-
-    .title{
-        margin-top: 0.5rem;
+    .form-signin .checkbox {
+        font-weight: normal;
+        font-size: 15px;
     }
-
-    #loginBtn{
-        margin-left: 4rem;
+    .form-signin .form-control {
+        position: relative;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .btn-primary {
+        background-color: #9BCD9B;
+        border-color: #9BCD9B;
+    }
+    .btn-primary:hover {
+        background-color: #7CCD7C;
+        border-color: #7CCD7C;
     }
 
 </style>
 <body>
-<canvas id="canvas"></canvas>
-
-<div id="banner">
-    帮买平台
-</div>
-<div id="loginForm">
+<!--<div id="loginForm">
     <div class="title">
         用户名： <input type="text" id="userName"><span style="color:red;">*</span>
     </div>
@@ -60,6 +83,28 @@
     <div class="title">
         <button class="btn-primary" id="submitBtn" onclick="submit()">注册</button>
     </div>
+</div>-->
+<div class="container">
+    <div class="form-signin" >
+        <h1 class="form-signin-heading">帮买平台</h1>
+        <label for="userName" class="sr-only">Email address</label>
+        <input type="text" id="userName" class="form-control" placeholder="请输入用户名" required autofocus>
+        <label for="phone" class="sr-only">phone</label>
+        <input style="margin-top: 10px" type="password" id="phone" class="form-control" placeholder="请输入手机号" required>
+        <label for="nickName" class="sr-only">Password</label>
+        <input style="margin-top: 10px" type="text" id="nickName" class="form-control" placeholder="请输入昵称" required>
+        <label for="password" class="sr-only">Password</label>
+        <input style="margin-top: 10px" type="password" id="password" class="form-control" placeholder="请输入密码" required>
+        <label for="checkPassword" class="sr-only">Password</label>
+        <input style="margin-top: 10px" type="password" id="checkPassword" class="form-control" placeholder="请确认密码" required>
+        <div class="mb-3">
+            <label>是否注册为骑手</label>
+            <input type="radio" class="radio-button" value="1" name="rider" id="car"><label for="car">是</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" class="radio-button" value="0" name="rider" checked id="other"><label for="other">否</label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" onclick="submit()" id="submitBtn" >注册</button>
+    </div>
+
 </div>
 
 </body>
@@ -76,7 +121,7 @@
         var checkPassword = $("#checkPassword").val().trim();
         var phone = $("#phone").val().trim();
         var nickName = $("#nickName").val().trim();
-        var rider = $("input[name=rider]").val();
+        var rider = $("input[name=rider]:checked").val();
         if(userName===""){
             alert("请输入用户名！");
             return false;

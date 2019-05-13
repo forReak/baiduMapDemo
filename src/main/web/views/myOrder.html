@@ -14,9 +14,18 @@
     #waitOrder,
     #sendingOrder,
     #finishOrder,
-    #canalOrder{
+    #canalOrder,
+    #searchOrder{
         font-size: 13px;
     }
+
+    .buycargoodImg{
+        width: 70px;height: 70px
+    }
+    .buyCarInfo{
+        float: left;
+    }
+
 </style>
 <br>
 <body>
@@ -29,6 +38,7 @@
                 <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">正在送</a>
                 <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">已完成</a>
                 <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="true">已取消</a>
+                <a class="nav-link" id="v-pills-search-tab" data-toggle="pill" href="#v-pills-search" role="tab" aria-controls="v-pills-search" aria-selected="true">查询</a>
             </div>
         </div>
         <div class="col-11">
@@ -113,6 +123,89 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="tab-pane fade" id="v-pills-search" role="tabpanel" aria-labelledby="v-pills-search-tab">
+                    <div class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" id="i_orderNo" placeholder="请输入订单号" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" onclick="searchOrder()" type="addsubmit">查询</button>
+                    </div>
+                    <table style="margin-top: 10px" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>下单时间</th>
+                            <th>订单状态</th>
+                            <th>寄件地址</th>
+                            <th>寄件人</th>
+                            <th>寄件人手机</th>
+                            <th>收件地址</th>
+                            <th>收件人</th>
+                            <th>收件人手机</th>
+                            <th>详情</th>
+                        </tr>
+                        </thead>
+                        <tbody id="searchOrder">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="orderInfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">订单详情</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <form id="goodsInfo"></form>
+                <form id="deliveryInfo"></form>
+                <div class="form-group">
+                    <label >送货人:</label><span class="t_ad"><span id="sendName">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >送货人电话:</label><span class="t_ad"><span id="sendPhone">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >送货地址:</label><span class="t_ad"><span id="sendAddr">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >送货详细地址:</label><span class="t_ad"><span id="sendAddrDetail">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >收货人:</label><span class="t_ad"><span id="reciveName">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >收货人电话:</label><span class="t_ad"><span id="recivePhone">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >收货地址:</label><span class="t_ad"><span id="reciveAddr">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >收货详细地址:</label><span class="t_ad"><span id="reciveAddrDetail">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >订单创建时间:</label><span class="t_ad"><span id="orderCreateTime">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >订单送达时间:</label><span class="t_ad"><span id="orderReciveTime">10</span></span>
+                </div>
+                <div class="form-group">
+                    <label >派送人:</label><span class="t_ad"><span id="deliveryName"></span></span>
+                </div>
+                <div class="form-group">
+                    <label >派送人电话:</label><span class="t_ad"><span id="deliveryPhone"></span></span>
+                </div>
+                <div class="form-group">
+                    <label >订单号:</label><span class="t_ad"><span id="orderNo">10</span></span>
+                </div>
+
             </div>
         </div>
     </div>
@@ -158,18 +251,6 @@
             var canal = "";
             for(let i = 0 ; i < orderInfo.length; i++){
                 let oneOrder = orderInfo[i];
-                /*var str = "订单信息---订单号："+oneOrder.orderNo+
-                        "。 省份："+ oneOrder.orderCity+
-                        "。 城市："+ oneOrder.orderPri+
-                        "。 邮编："+ oneOrder.orderZip+
-                        "。 寄件地址："+ oneOrder.startPos+
-                        "。 寄件详细地址："+ oneOrder.startDetailPos+
-                        "。 寄件人："+ oneOrder.sendName+
-                        "。 寄件人手机："+ oneOrder.sendPhone+
-                        "。 收件地址："+ oneOrder.endPos+
-                        "。 收件详细地址："+ oneOrder.endDetailPos+
-                        "。 收件人："+ oneOrder.reciveName+
-                        "。 收件人手机："+ oneOrder.recivePhone +"</br>"*/
                 var sendPhone = oneOrder.sendPhone===null?'':oneOrder.sendPhone;
                 var str =
                     "<tr>" +
@@ -181,9 +262,8 @@
                         "<td>"+ oneOrder.endPos+"</td>"+
                         "<td>"+ oneOrder.reciveName+"</td>"+
                         "<td>"+ oneOrder.recivePhone +"</td>"+
-                        "<td >详情</td>"+
+                        "<td style='cursor: pointer' data-toggle='modal' data-target='#orderInfo' id='"+oneOrder.orderNo+"' onclick='showOrderInfo(this)'>详情</td>"+
                     "</tr>";
-
                 if(oneOrder.orderStatus===10){
                     wait += str;
                 }
@@ -206,8 +286,175 @@
     }
 
 
+    function showOrderInfo(e){
+        var orderNo = $(e).attr("id");
+        console.log(orderNo);
+
+        //根据订单id查询订单详细信息并显示在dom中
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/myOrder/showOrderDetail",
+            data: {orderNo:orderNo},
+            dataType: "json",
+            success: function (result) {
+                if(result.flag){
+                    console.log(result.result);
+                    showOrderDetailInfo(result.result);
+                }
+                else{
+                    alert(result.message);
+                }
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+
+    function showOrderDetailInfo(orderDetailInfo){
+        var orderType = orderDetailInfo.orderType;
+        var insert = "";
+        var goodsInfo = orderDetailInfo.orderDetailList;
+        if(goodsInfo.length>0){
+            if(orderType==="1"){
+                //不显示订单物品
+                var orderDetail = $("#goodsInfo");
+                insert +=
+                    "<div class='form-group'>" +
+                    "    <label >----------------------------------------</label>" +
+                    "</div>";
+                for(var i=0;i<goodsInfo.length;i++) {
+                    var goods = goodsInfo[i];
+                    insert +=
+                        "<div class='form-group'>" +
+                        "    <label >货物类型："+goods.goodsType+"</label>" +
+                        "</div>"+
+                        "<div class='form-group'>" +
+                        "    <label >货物价值："+goods.goodsPrice+"¥</label>" +
+                        "</div>"+
+                        "<div class='form-group'>" +
+                        "    <label >货物重量："+goods.orderWeight+"kg</label>" +
+                        "</div>";
+                }
+                insert +=
+                    "<div class='form-group'>" +
+                    "    <label >----------------------------------------</label>" +
+                    "</div>";
+                orderDetail.html(insert);
+            }else{
+                var orderDetail = $("#goodsInfo");
+                insert +=
+                    "<div class='form-group'>" +
+                    "    <label >----------------------------------------</label>" +
+                    "</div>";
+                for(var i=0;i<goodsInfo.length;i++){
+                    var goods = goodsInfo[i];
+                    var goodsStr =
+                        " <div class='form-group goodsDiv'>" +
+                        "    <div class='buyCarInfo' >" +
+                        "        <img class='buycargoodImg' src='"+ctxPath+"/image/send.jpeg'>" +
+                        "    </div>" +
+                        "    <div class='buyCarInfo' style='width:300px;margin-left: 50px'>" +
+                        "        <div><span>商品：</span><span id='goodsName'>"+goods.goodsName+"</span></div>" +
+                        "        <div><span>¥</span><span id='money'>"+goods.goodsMoney+"</span></div>" +
+                        "        <div><span>数量</span><input name='num' value='"+goods.goodsNum+"' disabled type='number' style='border: none;' /></div>" +
+                        "    </div>" +
+                        "</div>";
+                    insert += goodsStr;
+                }
+                insert +=
+                    "<div class='form-group'>" +
+                    "    <label >----------------------------------------</label>" +
+                    "</div>";
+                orderDetail.html(insert);
+
+            }
+
+
+        }
+
+        $("#sendName").html(orderDetailInfo.sendName);
+        $("#sendPhone").html(orderDetailInfo.sendPhone);
+        $("#sendAddr").html(orderDetailInfo.startPos);
+        $("#sendAddrDetail").html(orderDetailInfo.startDetailPos);
+        $("#reciveName").html(orderDetailInfo.reciveName);
+        $("#recivePhone").html(orderDetailInfo.recivePhone);
+        $("#reciveAddr").html(orderDetailInfo.endPos);
+        $("#reciveAddrDetail").html(orderDetailInfo.endDetailPos);
+        $("#orderCreateTime").html(getLocalTime(orderDetailInfo.orderCreateTime));
+        var endTime = orderDetailInfo.orderRiderSendTime;
+        $("#orderReciveTime").html(endTime==null?endTime:getLocalTime(endTime));
+        var user = orderDetailInfo.user;
+        $("#deliveryName").html('');
+        $("#deliveryPhone").html('');
+        if(user!=null){
+            var s_n = orderDetailInfo.user.nickName;
+            var s_p = orderDetailInfo.user.phoneNum;
+            $("#deliveryName").html(s_n==null?"":s_n);
+            $("#deliveryPhone").html(s_p==null?"":s_p);
+        }
+        $("#orderNo").html(orderDetailInfo.orderNo);
+    }
+
+
+    function searchOrder(){
+        var orderNo = $("#i_orderNo").val();
+        if(orderNo===null||orderNo===""||orderNo===undefined){
+            alert("请输入订单号");
+            return false;
+        }
+        $.ajax({
+            type: "post",
+            url:ctxPath+ "/myOrder/showOrderDetail",
+            data: {orderNo:orderNo},
+            dataType: "json",
+            success: function (result) {
+                if(result.flag){
+                    console.log(result.result);
+                    printTable(result.result);
+                }
+                else{
+                    alert(result.message);
+                }
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+
+    function printTable(result){
+
+        var sendPhone = result.sendPhone===null?'':result.sendPhone;
+        var str =
+            "<tr>" +
+            "<td>"+result.orderNo+"</td>"+
+            "<td>"+ getLocalTime(result.orderCreateTime)+"</td>"+
+            "<td>"+ returnStatus(result.orderStatus)+"</td>"+
+            "<td>"+ result.startPos+"</td>"+
+            "<td>"+ result.sendName+"</td>"+
+            "<td>"+ sendPhone +"</td>"+
+            "<td>"+ result.endPos+"</td>"+
+            "<td>"+ result.reciveName+"</td>"+
+            "<td>"+ result.recivePhone +"</td>"+
+            "<td style='cursor: pointer' data-toggle='modal' data-target='#orderInfo' id='"+result.orderNo+"' onclick='showOrderInfo(this)'>详情</td>"+
+            "</tr>";
+        $('#searchOrder').html(str);
+    }
+
+
     function getLocalTime(nS) {
         return new Date(parseInt(nS) ).toLocaleString().replace(/:\d{1,2}$/,' ');
+    }
+
+    function returnStatus(status){
+        switch (status) {
+            case 10: return "新建";
+            case 12: return "已接单";
+            case 16: return "已完成";
+            case 17: return "已取消";
+            default : return "未知";
+        }
     }
 </script>
 

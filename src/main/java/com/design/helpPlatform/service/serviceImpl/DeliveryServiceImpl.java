@@ -8,13 +8,11 @@ import com.design.helpPlatform.entity.OrderInfo;
 import com.design.helpPlatform.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,6 +114,12 @@ public class DeliveryServiceImpl implements DeliveryService {
         map.put("time",new Timestamp(System.currentTimeMillis()));
         int i = orderDao.updateOrderFinish(map);
         return i;
+    }
+
+    @Override
+    public List<OrderDetailEntity> getOrderDetailbyOrderNo(String orderNo) {
+        List<OrderDetailEntity> orderDetailEntityList = orderDetailDao.getOrderDetailByOrderNo(orderNo);
+        return orderDetailEntityList;
     }
 
 

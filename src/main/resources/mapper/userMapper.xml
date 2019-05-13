@@ -10,6 +10,7 @@
         <id column="submit_addr" property="submitAddr" jdbcType="INTEGER"/>
         <id column="birth_day" property="birthDay" jdbcType="TIMESTAMP"/>
         <id column="rider" property="rider" jdbcType="INTEGER"/>
+        <id column="sex" property="sex" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--表名-->
@@ -17,7 +18,7 @@
 
     <!--字段名-->
     <sql id="user_base_column">
-         id,user_name,password,phone_num,nick_name,submit_addr,birth_day,rider
+         id,user_name,password,phone_num,nick_name,submit_addr,birth_day,sex,rider
     </sql>
 
     <select id="getUserByUerName" parameterType="String" resultMap="UserMap">
@@ -54,5 +55,16 @@
                 #{rider}
         )
     </insert>
+
+
+    <update id="updateByUser" parameterType="com.design.helpPlatform.entity.User">
+      update <include refid="t_user"/>
+      set
+        id = #{id},user_name=#{userName},
+        password=#{password},phone_num = #{phoneNum},
+        nick_name = #{nickName},submit_addr = #{submitAddr},
+        rider = #{rider},sex = #{sex}
+      where id = #{id}
+    </update>
 
 </mapper>

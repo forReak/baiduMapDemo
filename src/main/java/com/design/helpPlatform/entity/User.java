@@ -23,14 +23,6 @@ public class User {
 
     private Integer rider;
 
-    public Integer getRider() {
-        return rider;
-    }
-
-    public void setRider(Integer rider) {
-        this.rider = rider;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -71,7 +63,6 @@ public class User {
         this.nickName = nickName;
     }
 
-
     public String getSubmitAddr() {
         return submitAddr;
     }
@@ -94,5 +85,13 @@ public class User {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public Integer getRider() {
+        return rider;
+    }
+
+    public void setRider(Integer rider) {
+        this.rider = rider;
     }
 }

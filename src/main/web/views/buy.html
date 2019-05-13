@@ -824,7 +824,8 @@
             success: function (result) {
                 if(result.flag){
                     alert("下单成功！");
-                    // window.location.href=ctxPath+"/";
+                    window.location.href = ctxPath+ "/myOrder/list"
+
                 }
                 else{
                     alert(result.message);

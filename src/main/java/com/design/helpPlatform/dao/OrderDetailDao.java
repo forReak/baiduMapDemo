@@ -13,4 +13,8 @@ public interface OrderDetailDao {
     int insert(OrderDetailEntity orderDetailEntity);
 
     int insertBeach(List<OrderDetailEntity> orderDetailEntities);
+
+    List<OrderDetailEntity> orderEntity(String orderNo);
+
+    List<OrderDetailEntity> getOrderDetailByOrderNo(String orderNo);
 }

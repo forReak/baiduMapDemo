@@ -112,12 +112,14 @@
         select  <include refid="user_base_column" />
         from t_order
         where order_owner = #{userId}
+        order by order_create_time desc
     </select>
 
     <select id="getAllWaitOrderEntity"  resultMap="OrderMap">
         select  <include refid="user_base_column" />
         from t_order
         where order_status = '10'
+        order by order_create_time desc
     </select>
 
     <select id="getOrderEntityByRider" parameterType="Integer"  resultMap="OrderMap">

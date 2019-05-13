@@ -11,6 +11,15 @@ public class GoodsEntity {
     private BigDecimal goodsPrice;
     private String goodsDesc;
     private String goodsPic;
+    private BigDecimal goodsMoney;
+
+    public BigDecimal getGoodsMoney() {
+        return goodsMoney;
+    }
+
+    public void setGoodsMoney(BigDecimal goodsMoney) {
+        this.goodsMoney = goodsMoney;
+    }
 
     public Integer getId() {
         return id;

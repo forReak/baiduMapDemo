@@ -32,6 +32,15 @@ public class OrderEntity implements Serializable {
     private String orderPri;
     private String orderZip;
     private List<OrderDetailEntity> orderDetailList;
+    private User user;//送货人
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<OrderDetailEntity> getOrderDetailList() {
         return orderDetailList;

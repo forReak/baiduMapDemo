@@ -1,8 +1,11 @@
 package com.design.helpPlatform.controller;
 
+import com.design.helpPlatform.entity.OrderDetailEntity;
 import com.design.helpPlatform.entity.OrderEntity;
 import com.design.helpPlatform.entity.ResponseMap;
+import com.design.helpPlatform.entity.User;
 import com.design.helpPlatform.service.DeliveryService;
+import com.design.helpPlatform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import java.util.List;
 public class OrderController {
     @Autowired
     DeliveryService deliveryService;
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/list")
     public String orderList(){
@@ -60,6 +65,25 @@ public class OrderController {
             return "getOrder";
         }else{
             return "error";
+        }
+    }
+
+
+    @RequestMapping("/showOrderDetail")
+    @ResponseBody
+    public ResponseMap showOrderDetail(String orderNo){
+        try {
+            OrderEntity orderEntity = deliveryService.getOrderByOrderNo(orderNo);
+            List<OrderDetailEntity> orderDetailEntity = deliveryService.getOrderDetailbyOrderNo(orderNo);
+            User user = userService.getUserById(orderEntity.getOrderRiderId());
+            orderEntity.setOrderDetailList(orderDetailEntity);
+            orderEntity.setUser(user);
+            return new ResponseMap(true,orderEntity,"查询成功！");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseMap(false,"false","false");
+
         }
     }
 

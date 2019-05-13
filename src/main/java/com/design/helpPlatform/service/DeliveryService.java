@@ -1,5 +1,6 @@
 package com.design.helpPlatform.service;
 
+import com.design.helpPlatform.entity.OrderDetailEntity;
 import com.design.helpPlatform.entity.OrderEntity;
 import com.design.helpPlatform.entity.OrderInfo;
 
@@ -21,4 +22,6 @@ public interface DeliveryService {
     int updateOrderToSending(String orderNo, Integer userId);
 
     int updateOrderFinish(String orderNo);
+
+    List<OrderDetailEntity> getOrderDetailbyOrderNo(String orderNo);
 }

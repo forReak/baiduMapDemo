@@ -36,4 +36,11 @@ public interface UserDao {
      * @return
      */
     User getUserById(Integer userId);
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    Integer updateByUser(User user);
 }

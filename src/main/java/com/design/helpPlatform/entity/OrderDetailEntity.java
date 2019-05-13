@@ -16,36 +16,12 @@ public class OrderDetailEntity {
     private String goodsPic;
     private Integer goodsNum;
 
-    public String getGoodsPic() {
-        return goodsPic;
-    }
-
-    public void setGoodsPic(String goodsPic) {
-        this.goodsPic = goodsPic;
-    }
-
-    public Integer getGoodsNum() {
-        return goodsNum;
-    }
-
-    public void setGoodsNum(Integer goodsNum) {
-        this.goodsNum = goodsNum;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getGoodsPrice() {
-        return goodsPrice;
-    }
-
-    public void setGoodsPrice(String goodsPrice) {
-        this.goodsPrice = goodsPrice;
     }
 
     public String getOrderNo() {
@@ -70,6 +46,14 @@ public class OrderDetailEntity {
 
     public void setGoodsType(String goodsType) {
         this.goodsType = goodsType;
+    }
+
+    public String getGoodsPrice() {
+        return goodsPrice;
+    }
+
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
     public String getGoodsName() {
@@ -102,5 +86,21 @@ public class OrderDetailEntity {
 
     public void setGoodsRemark(String goodsRemark) {
         this.goodsRemark = goodsRemark;
+    }
+
+    public String getGoodsPic() {
+        return goodsPic;
+    }
+
+    public void setGoodsPic(String goodsPic) {
+        this.goodsPic = goodsPic;
+    }
+
+    public Integer getGoodsNum() {
+        return goodsNum;
+    }
+
+    public void setGoodsNum(Integer goodsNum) {
+        this.goodsNum = goodsNum;
     }
 }

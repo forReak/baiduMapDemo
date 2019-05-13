@@ -53,7 +53,7 @@
 <div id="banner">
 </div>
 <div>
-    <button id="orderNow" class="btn-primary">立即下单</button>
+    <button id="orderNow" onclick="orderNow()" class="btn-primary">立即下单</button>
 </div>
 <div class="font">
     核&nbsp;&nbsp;心&nbsp;&nbsp;业&nbsp;&nbsp;务
@@ -74,4 +74,11 @@
     服&nbsp;&nbsp;务&nbsp;&nbsp;规&nbsp;&nbsp;模
 </div>
 </body>
+
+<script type="text/javascript" th:inline="javascript">
+
+    function orderNow(){
+        window.location.href = ctxPath + "/buy/makeOrder";
+    }
+</script>
 </html>

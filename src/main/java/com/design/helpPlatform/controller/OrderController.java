@@ -43,16 +43,31 @@ public class OrderController {
         return new ResponseMap(true,orderEntityList,"success");
     }
 
+    /**
+     * 骑手点击接单后的后台操作
+     * @param session 缓存
+     * @param model model
+     *              包含了页面跳转信息和向前台发送的参数。
+     * @return 当return 一个string的时候，就代表返回一个页面的名称。springMVC的
+     * 底层实现中，回自动将入参参数中的model放到页面中。
+     */
     @RequestMapping("/getOrder")
     public String getOrder(HttpSession session, Model model){
-        //查询当前骑手是否有未完成单
+        //获取缓存中当前登陆人的id
         Integer userId = (Integer)session.getAttribute("userId");
+        //根据当前登陆人的id，去数据库查询当前骑手是否有未完成单
         OrderEntity orderEntity = deliveryService.getOrderByRider(userId);
+        //查询结束。获取到订单信息：orderEntity
+        //如果订单信息是空的，则向前台返回接单页面
         if(orderEntity==null){
             return "getOrder";
         }else{
+            //否则，向前台返回订单信息，及跳转到导航页面。
             //返回起始点位置信息
+            //根据key-value去向model中放入前台所需要的参数。
             model.addAttribute("orderInfo",orderEntity);
+            /*model.addAttribute("name",orderEntity);
+            model.addAttribute("age",orderEntity);*/
             return "nav";
         }
     }

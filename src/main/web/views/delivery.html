@@ -303,6 +303,8 @@
 
 
 <script type="text/javascript">
+
+
     //初始化地图脚本
     //保存开始位置
     var startPos;
@@ -310,6 +312,9 @@
     var endPos;
 
     var map = new BMap.Map();//在百度地图容器中创建一个地图
+
+    //绑定起始位置和终止位置的输入框自动填充及点击具体地址时获取GPS坐标
+
     var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
         {
             "input": "sendAddress",

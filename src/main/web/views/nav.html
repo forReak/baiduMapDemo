@@ -42,12 +42,25 @@
 <button onclick="checkArrive()">点击确认送达</button>
 </body>
 
-<script type="text/javascript" th:inline="javascript">
 
+<script type="text/javascript" th:inline="javascript">
+    //开始前台的js代码 javascript
+
+    //通过thymleaf 进行获取后台向前台传递的订单信息（orderInfo）
+    //同步请求
     var orderInfo = [[${orderInfo}]];
+    // var orderInfo = [[${name}]];
+    // var orderInfo = [[${age}]];
+
+    //获取到开始时的地理坐标
     var start = orderInfo.startGps;
+    //获取到结束时的地理坐标
     var end = orderInfo.endGps;
+
+    //向控制台打印开始坐标和结束坐标
     console.log(start+"   "+end);
+
+    //进行渲染table
     var sendPhone = orderInfo.sendPhone===null?'':orderInfo.sendPhone;
     var str =
         "<tr>" +
@@ -62,19 +75,30 @@
         "<td>"+ orderInfo.reciveName+"</td>"+
         "<td>"+ orderInfo.recivePhone +"</td>"+
         "</tr>";
-
-
     $("#searchOrder").html(str);
+    //渲染表格结束。
 
+    //将我们的开始坐标封装成百度地图api识别的参数
     var startpoint = new BMap.Point(start.split(" ")[0],start.split(" ")[1]);
+    //将我们的结束坐标封装成百度地图api识别的参数
     var endpoint = new BMap.Point(end.split(" ")[0],end.split(" ")[1]);
 
+
     // 百度地图API功能
+    //创建一个地图
     var map = new BMap.Map("l-map");
+    //将地图的中心点坐标声明出来。此时，地图就会进行加载。
     map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+
+    //设置我们的起始位置和结束位置，为接下来的显示导航信息做准备。
     map.setViewport([startpoint,endpoint]);
+
+    //进行规划一个驾车导航方案，并且在指定的位置（"r-result"）显示文字规划方案。
     var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
+
+    //将导航信息进行显示到地图上。
     driving.search(startpoint, endpoint);
+
 
 
     function checkArrive(){

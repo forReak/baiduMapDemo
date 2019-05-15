@@ -103,12 +103,16 @@
     function login(){
         var userName = $("#userName").val();
         var password = $("#password").val();
+        //向后台发送异步请求。
+        // 异步请求可以不进行页面跳转，
+        // 就可以从后台获取到返回的参数。
         $.ajax({
             type: "post",
             url:ctxPath+ "/login",
             data: {userName:userName,password:password},
             dataType: "json",
             success: function (result) {
+                //result就是后台向前台返回的结果。
                 if(result.flag){
                     window.location.href=ctxPath+"/";
                 }

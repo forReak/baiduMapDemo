@@ -329,14 +329,21 @@
         setEndPlace();
     });
 
+    //重要 ： 进行监听鼠标点击下拉框中的地址位置的时候发生的事情：
     function setStartPlace() {// 创建地址解析器实例
         var myGeo = new BMap.Geocoder();// 将地址解析结果显示在地图上,并调整地图视野
         myGeo.getPoint(startValue, function (point) {
+            //当鼠标按下时，回自动通过此方法返回给开发人员一个point坐标。
+            // 此时，开发人员就可以获取到点击的地理位置的坐标
             if (point) {
                 //将地址存在临时input中
+                //
                 startPos = point;
+                //将我们获取到的GPS坐标封装成百度地图识别的位置坐标
                 var marker = new BMap.Marker(point);        // 创建标注
+                //将百度地图识别的位置坐标进行显示到地图上
                 map.addOverlay(marker);
+                //在控制台上打印坐标
                 console.log("起始坐标："+ JSON.stringify(point))
             }
         });
@@ -354,21 +361,29 @@
         });
     }
 
+    //当点击上方搜索！按钮的时候，执行以下的方法
     function searchNow(){
+        //判断我们上方的位置信息是否输入了
         if(startPos===null||startPos===""||startPos===undefined){
             alert("请输入我的位置～");
             return false;
         }
+        //进行获取我们所输入的想要查询的物品的信息
         var q = $("#searchGoods").val().trim();
         if(q===null||q===""||q===undefined){
             return alert("请输入想要查询的物品～");
             return false;
         }
+        //获取我们所输入的半径
         var radius = $("#dist").val().trim();
         if(radius===null||radius===""||radius===undefined){
             radius = 1000;
         }
+        //进行获取位置信息的GPS
         var loc = startPos.lng+","+startPos.lat;
+
+        //重点 ： 向百度地图api进行请求
+        //请求方法：在指定的范围中，查询关键词。
         var url = "http://api.map.baidu.com/geosearch/v3/nearby?" +
             "ak=xwWID35KbLINQjL50sazS4TmLAo8wUFx&geotable_id=201864&location="
             +loc+"&q="+q+"&radius="+radius +"&callback=showInfo";
@@ -377,39 +392,69 @@
     }
 
     /**
-     * 显示商家
+     * 百度地图查询到了我们想要的数据，然后给我们返回了
+     * 这个方法就是解析返回消息的方法
+     * dataInfo：返回的具体内容
      */
     function showInfo(dataInfo){
+        //在控制台上，打印出了百度返回给我们的数据
         console.log(dataInfo);
 
+        //如果数据中，包含的状态码是0，那么百度就查询成功了。
+        // 这时候我们也要告诉用户，查询失败了
+        //0表示成功，其他值详见状态码说明
         if(dataInfo.status!==0){
             alert("调用百度地图api失败！请重试～");
             return false;
         }
+
+        //如果返回成功了，但是返回的数据长度是0，那么百度地图没查到东西。
         if(dataInfo.size===0){
             alert("您的范围内没有您想要的东西～请重试～");
             return false;
         }
+
+        //如果百度地图查询到了我们所在lbs云上的数据，
+        // 那么百度地图就会返回给我们
+
+        //首先进行声明一个模板，用来显示商家信息
         var opts = {
             width : 250,     // 信息窗口宽度
             height: 80,     // 信息窗口高度
             title : "商家信息" , // 信息窗口标题
             enableMessage:true//设置允许信息窗发送短息
         };
+
+        //通过百度地图返回的数据，获取到具体的商家。（不止一家）
         var shopInfo = dataInfo.contents;
+        //设置，所有的商家都能在可见范围内（暂时不管用）
         var viewPoints =[];
+
+        //重点 ： 循环进行向地图上添加商家的点信息。
         for(var i=0;i<shopInfo.length;i++){
+            //获取第一个。。。第n个商家的信息
             var shop = shopInfo[i];
+            //进行标注第一个。。。第n个商家的位置信息
             var point= new BMap.Point(shop.location[0],shop.location[1]);
             viewPoints.push(shop.point);
+
             var marker = new BMap.Marker(point);  // 创建标注
+
+            //获取商店的名称
             var shopName = shop.title;
+            //获取商店的标签
             var tags = shop.tags;
+            //获取商店的地址
             var address = shop.address;
+            //获取商店的url
             var shopUrl = shop.shopUrl;
+            //将所有以上的内容，都添加上链接。只要你一点击，就会触发显示商家详情的方法。
             var content = "<a style='color: #006ace;' type='"+shopUrl+"' onclick='getShop(this)'>"+ shopName+"</br>标签："+tags+"</br>地址："+address+"</a>";
+            //将我们当前的商家，渲染到地图上（以小红点的形式渲染上去）
             map.addOverlay(marker);
+            //添加小红点的点击事件
             marker.addEventListener("click",setShopPos);// 将标注添加到地图中
+            //添加处理事件（百度地图需要的）
             addClickHandler(content,marker);
         }
        //自动缩放问题未解决

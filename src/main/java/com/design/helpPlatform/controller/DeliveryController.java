@@ -29,7 +29,7 @@ public class DeliveryController {
     @ResponseBody
     public ResponseMap orderNow(OrderInfo orderInfo, HttpSession session){
         try {
-            int i = deliveryService.orderNow(orderInfo, session);
+                int i = deliveryService.orderNow(orderInfo, session);
             if(i>0){
                 return new ResponseMap(true,"success","success");
             }else{

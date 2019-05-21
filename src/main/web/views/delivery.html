@@ -210,6 +210,7 @@
      */
     function orderNow(){
         //获取所有输入项进行验证
+        //依次获得页面所有输入项
         var country = $("#country").val().trim();
         var state = $("#state").val().trim();
         var zip = $("#zip").val().trim();
@@ -230,7 +231,7 @@
         var sendRemark = $("#sendRemark").val().trim();
         var sendType = $("input[name=sendType]").val();
 
-
+        //判断输入项是否是空
         checkNull(country,"送货省份");
         checkNull(state,"送货城市");
         checkNull(zip,"送货邮编");
@@ -247,6 +248,7 @@
         checkNull(weight,"货物重量");
         checkNull(sendType,"送货方式");
 
+        //将输入项封装成一个对象，准备传递给后台。
         var parames = {
             country:country,
             state:state,
@@ -269,10 +271,14 @@
             sendType:sendType
         };
 
+        //开始进行与后台传输数据
         $.ajax({
             type: "post",
+            //定义与后台传输时的路径请求地址
             url:ctxPath+ "/delivery/orderNow",
+            //进行将数据一同传递到后台
             data: parames,
+
             dataType: "json",
             success: function (result) {
                 if(result.flag){
@@ -290,6 +296,7 @@
                 console.log(result);
             }
         });
+
     }
 
     function checkNull(e,name){

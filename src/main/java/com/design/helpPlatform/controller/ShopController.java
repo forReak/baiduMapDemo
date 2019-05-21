@@ -15,6 +15,14 @@ import java.util.List;
 
 import static com.design.helpPlatform.util.Util.listIsEmpty;
 
+/**
+ * 如何添加商品信息：
+ * 1。进入虎鲸云数据管理平台，点击我们的数据库，新增点
+ * 2。将url和商家信息同步保存到本地数据库
+ * 3。新增商家的类别信息
+ * 4。新增商家的商品信息
+ * 5。发布云端数据
+ */
 @Controller
 public class ShopController {
 

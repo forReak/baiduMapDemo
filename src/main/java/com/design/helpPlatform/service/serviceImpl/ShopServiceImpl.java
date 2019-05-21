@@ -27,6 +27,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public ShopEntity getShopByUrl(String url) {
+        //首先通过dao获取数据库中的数据，放入shopEntity
         ShopEntity shopEntity = shopDao.getShopInfoByUrl(url);
         if(shopEntity!=null){
             //根据商家id获取货物类型及货物

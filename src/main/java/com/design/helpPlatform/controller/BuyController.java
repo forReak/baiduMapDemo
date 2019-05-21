@@ -32,17 +32,36 @@ public class BuyController {
         return "buy";
     }
 
+
+
+    /**
+     * 添加商品到购物车
+     *      * 当前台页面点击购物车的小按钮后，
+     *      * 会自动发动一个请求到后台，传递的就是商品的id
+     *      购物车的实现思路是通过springmvc的session进行实现的
+     * @param goodsId 入参参数：商品id
+     * @param session 缓存
+     * @return
+     */
     @RequestMapping("/addGoodsToBuyCar")
     @ResponseBody
     public ResponseMap addGoodsToBuyCarAction(String goodsId, HttpSession session){
         try {
+            //我们通过程序，获取到缓存
             String buyCar = (String)session.getAttribute("buyCar");
+            //如果缓存是空，那么我们就当当前的id保存成字符串的格式：'17，'
             if(buyCar==null){
                 buyCar = goodsId +",";
             }else{
+                //如果缓存不是空，那么我们就将当前的商品信息追加到缓存后去
+                //'1，6，3，2，2，7，19,17，'
                 buyCar += goodsId+",";
             }
+            //重新将我们编辑好的字符串放入缓存中。放入缓存中后，就成功保存了购物车信息
+            //注意的是，缓存只在当前程序启动中才有效果。重启程序或终断后，缓存都会消失
             session.setAttribute("buyCar",buyCar);
+
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseMap(false,null,e.getMessage());
@@ -52,7 +71,7 @@ public class BuyController {
 
 
     /**
-     * 添加商品到购物车
+     * 获取购物车信息
      * @param session
      * @return
      */

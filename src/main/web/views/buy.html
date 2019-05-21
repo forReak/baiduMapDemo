@@ -91,10 +91,10 @@
                             <img style="width:130px;height: 90px;margin-left: 20px" th:src="@{/image/buy.jpeg}" alt="">
                         </div>
                         <div style="float: left">
-                            <div id="shopName" style="font-weight: bold">星巴克</div>
+                            <div id="shopName" style="font-weight: bold"></div>
                             <div id="onlineTime">营业时间</div>
                             <div>当前状态：<span style="color: #2e5417;" id="status">营业中</span></div>
-                            <div><img th:src="@{/image/pos.png}" style="width: 15px;height: 15px;" alt=""><span id="address">地址地址地址地址地址地址</span></div>
+                            <div><img th:src="@{/image/pos.png}" style="width: 15px;height: 15px;" alt=""><span id="address"></span></div>
                         </div>
                     </div>
                     <div style="margin-left: 20%;margin-top: 5px;">
@@ -103,7 +103,7 @@
                     </div>
                     <div style="width: 100%;height:350px;clear: left;overflow-y: scroll">
                         <div style="float: left;width: 30%;height: 350px;overflow-y: scroll" id="shopType">
-                            <div class="type">热卖商品</div>
+                            <!--<div class="type">热卖商品</div>
                             <div class="type">大师咖啡</div>
                             <div class="type">星冰乐</div>
                             <div class="type">甜点</div>
@@ -111,11 +111,11 @@
                             <div class="type">冰摇茶</div>
                             <div class="type">三明治</div>
                             <div class="type">摩卡</div>
-                            <div class="type">拿铁</div>
+                            <div class="type">拿铁</div>-->
                         </div>
 
                         <div id="shopGoods" style="float: left;width: 70%;height: 350px;overflow-y: scroll" >
-                            <div class="goods" >
+                            <!--<div class="goods" >
                                 <div><img class="goodImg" style="" th:src="@{/image/send.jpeg}" alt=""></div>
                                 <divd>商品名称</divd>
                                 <div><span>¥30</span><img class="shopCar" th:src="@{/image/shopCar.png}" alt='加入购物车'></div>
@@ -160,7 +160,7 @@
                                 <div><img class="goodImg" style="" th:src="@{/image/send.jpeg}" alt=""></div>
                                 <div>商品名称</div>
                                 <div><span>¥30</span><img class="shopCar" th:src="@{/image/shopCar.png}" alt=""></div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -384,6 +384,11 @@
 
         //重点 ： 向百度地图api进行请求
         //请求方法：在指定的范围中，查询关键词。
+        //loc：地理位置（GPS坐标）
+        //q：搜索关键词
+        //radius：查询半径
+        //通过这句话，向百度地图发送请求，进行查询我们的云端（虎鲸云数据平台）数据库，将查询到的结果，返回给我们
+        //向showInfo方法传递入参的时候，入参的参数就是我们想要的结果
         var url = "http://api.map.baidu.com/geosearch/v3/nearby?" +
             "ak=xwWID35KbLINQjL50sazS4TmLAo8wUFx&geotable_id=201864&location="
             +loc+"&q="+q+"&radius="+radius +"&callback=showInfo";
@@ -394,7 +399,8 @@
     /**
      * 百度地图查询到了我们想要的数据，然后给我们返回了
      * 这个方法就是解析返回消息的方法
-     * dataInfo：返回的具体内容
+     * dataInfo：百度地图通过查询我们存放在云端的数据库，
+     * 返回给我们的具体内容。具体内容包括云端数据库中的所有属性
      */
     function showInfo(dataInfo){
         //在控制台上，打印出了百度返回给我们的数据
@@ -448,7 +454,9 @@
             var address = shop.address;
             //获取商店的url
             var shopUrl = shop.shopUrl;
-            //将所有以上的内容，都添加上链接。只要你一点击，就会触发显示商家详情的方法。
+            //将所有商家的内容，都添加上链接。只要你一点击，就会触发显示商家详情的方法。
+            //重点：此时，我们就能成功的将虎鲸云数据平台中的数据，放到我们的前台页面中。
+            //在百度地图上，渲染出来白色的商家信息框，以及将字体上面添加一个点击事件getShop，当点击蓝色字体时，那么就会执行相应的事件getShop
             var content = "<a style='color: #006ace;' type='"+shopUrl+"' onclick='getShop(this)'>"+ shopName+"</br>标签："+tags+"</br>地址："+address+"</a>";
             //将我们当前的商家，渲染到地图上（以小红点的形式渲染上去）
             map.addOverlay(marker);
@@ -482,11 +490,20 @@
         map.openInfoWindow(infoWindow,point); //开启信息窗口
     }
     
-    
+    /**
+     * 重点：
+     *  点击蓝色的字体后，进行执行的方法
+     *  该方法具体的功能是，显示下面的商家的具体信息。
+     **/
     function getShop(data){
+        //第一步，方法会接受一个参数data，data里面有一个参数是type
+        // 这个type就是我们的虎鲸云数据平台中的商家的url
         var url = data.type;
+        //打印出来当前商家的url
         console.log(url);
 
+        //会进行记录当前商家的url，放入全局变量中。进行判断，以前是否有这个全局变量。
+        // 如果有，那么就说明是用户进行切换的商家，那么自动进行清除购物车缓存。
         if(curShop!==null){
             var flag = window.confirm("切换商家后将清空购物车哦～");
             if(!flag){
@@ -496,14 +513,20 @@
             curShop = url;
         }
 
+        //我们拿到url之后，向后台发送一个异步请求，用来根据url进行获
+        // 取我们本地数据库中的该商家的商品列表以及商品种类，及商家的基础信息
         $.ajax({
             type: "post",
             url:ctxPath+ "/getShopInfo",
             data: {shopInfo:url},
             dataType: "json",
             success: function (result) {
+                //当这个方法调用成功的时候，后台就会向前台页面返回商家的数据
+                //success方法中的result值里面，就是我们本地后台数据库中的商家信息。包含：
+                //1，商品类别。2，所有商品名称及价格。3，商品id
                 if(result.flag){
-
+                    //当我们后台查数据库的时候，能查到具体的商品数据的时候，执行showShopInfo方法。
+                    //showShopInfo方法就是显示商品的具体信息的方法。
                     showShopInfo(result.result);
                 }
                 else{
@@ -539,19 +562,24 @@
 
 
 
-
+    /**
+     *  该方法是当后台传递给前台商店及商品数据后，前台负责将数据显示到页面上
+     *  解藕 （代码的解藕有助于开发人员进行面向对象的开发。而不是面向过程开发）
+     * **/
     function showShopInfo(shopInfo){
-
+        //方法首先会有一个入参的参数。这个参数里面包含了所有信息
         if(shopInfo!=null&&shopInfo!==""&&shopInfo!==undefined){
-            var shopname = shopInfo.shopName;
-            var shopAddr = shopInfo.shopAddr;
-            var shopTags = shopInfo.shopTags;
-            var shopMainItem = shopInfo.shopMainItem;
-            var online = shopInfo.online;
-            var shopType = shopInfo.typeList;
-            var goodsList = shopInfo.goodsEntityList;
+            //之后，我们会取出shopInfo中的各个商店的属性值
+            var shopname = shopInfo.shopName;//取出商店名称
+            var shopAddr = shopInfo.shopAddr;//取出商店地址
+            var shopTags = shopInfo.shopTags;//取出了商店的tags
+            var shopMainItem = shopInfo.shopMainItem;//取出商店的主营业务
+            var online = shopInfo.online;//取出商店是否营业标示
+            var shopType = shopInfo.typeList;//取出商店所售的种类列表。也就是左侧淡黄色商品种类
+            var goodsList = shopInfo.goodsEntityList;//取出商店所有物品 也就是右侧商品信息
 
-            //设置商店信息
+            //在页面上，将js中的文本信息取出，设置到页面上
+            // 商店信息，是否在线，商店地址
             $("#shopName").html(shopname);
             $("#onlineTime").html(online);
             $("#address").html(shopAddr);
@@ -563,16 +591,20 @@
         }
     }
 
+    //设置商品的列表信息
     function showShopType(shopType) {
         var innerShopTypeStr = "";
+        //对传入的商品种类信息进行循环，放入innerShopTypeStr字符串
         for (var i = 0; i < shopType.length; i++) {
             innerShopTypeStr += "<div class='type' style='cursor: pointer' id='type_"+shopType[i].id+"' onclick='getGodosByType(this)'>" + shopType[i].itemType + "</div>"
         }
+        //将innerShopTypeStr字符串放入到网页中
         $("#shopType").html(innerShopTypeStr);
     }
-
+    //设置商品的具体信息
     function showShopGoods(goodsList){
         var innerShopGoodsStr = "";
+        //首先，对商品进行循环，渲染到页面上
         for(var i = 0 ; i < goodsList.length;i++){
             innerShopGoodsStr +=
                 "<div class='goods'>"+
@@ -584,7 +616,7 @@
                     "</div>"
                 +"</div>";
         }
-
+        //将innerShopGoodsStr字符串放入到网页中
         $("#shopGoods").html(innerShopGoodsStr);
 
     }
@@ -595,21 +627,29 @@
      * @returns {boolean}
      */
     function getGodosByType(div){
+        //首先程序会将点击的对象获取到，根据点击的对象，获取到种类的id
         console.log(div);
         var type_id = $(div).attr("id");
         console.log(type_id);
         var typeId = type_id.split("_")[1];
+
+        //获取到种类id后，会打印到控制台上
         console.log(typeId);
+
         if(typeId===null||typeId===""||typeId===undefined){
             alert("无法获取类型数据，请查看控制台数据～");
             return false;
         }
+        //程序会执行一个异步的方法，将商品种类信息传到后台，
+        //后台通过查询数据库进行显示出种类下有什么物品
         $.ajax({
             type: "post",
             url:ctxPath+ "/getGoodsInfoByType",
             data: {typeId:typeId},
             dataType: "json",
             success: function (result) {
+
+                //后台查询到我们想要的种类下都有什么物品，然后进行显示出来
                 if(result.flag){
                     if(result.result!==null){
                         showShopGoods(result.result);
